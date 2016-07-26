@@ -50,7 +50,7 @@ public class BuilderConcretoEvento implements IBuilderEvento
 		try {
 			this.evento.setRepeticao(repeticoes);
 		} catch (Exception e) {
-			e.printStackTrace(); // AJEITAR ISSO AQUI DEPOIS HEIIIN!!!
+			// AJEITAR ISSO AQUI DEPOIS HEIIIN!!! e.printStackTrace(); 
 		}	
 	}
 
