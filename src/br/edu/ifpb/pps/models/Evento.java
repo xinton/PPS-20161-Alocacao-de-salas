@@ -11,6 +11,10 @@ public class Evento {
 	private boolean repete;
 	private ArrayList<Sala> salas;
 	
+	public Evento(){
+		
+	}
+	
 	/**
 	 * Construtor da Classe Evento, O construtor já inicializa os atributos principais da classe.
 	 * 
