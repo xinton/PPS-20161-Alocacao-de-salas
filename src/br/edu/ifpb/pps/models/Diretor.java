@@ -1,5 +1,9 @@
 package br.edu.ifpb.pps.models;
 
+import java.util.Date;
+
+import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
+
 /**
  * Esta classe fará com que seja instaciado apenas um diretor.
  * @author Matheus Mayer
@@ -8,7 +12,7 @@ package br.edu.ifpb.pps.models;
 public class Diretor 
 {
 	private static Diretor unicoDiretor;
-
+	private IBuilderEvento builderEvento;
 	/**
 	 * Este metodo será privado para que não haja mais de uma instancia.
 	 * @author Matheus Mayer
@@ -29,5 +33,28 @@ public class Diretor
 		}
 		
 		return unicoDiretor;
+	}
+	
+	/**
+	 * Este metodo recupera o evento
+	 * @author Matheus Mayer
+	 * @return Evento builderEvento
+	 */
+	public Evento getEvento()
+	{
+		return this.builderEvento.getEvento();
+	}
+	
+	public void construirEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes, boolean repete)
+	{
+		this.builderEvento.criarNovoEvento();
+		this.builderEvento.definirNome(nome);
+		this.builderEvento.definirDataInicio(dataIni);
+		this.builderEvento.definirDataFim(dataFim);
+		this.builderEvento.definirContato(contato);
+		//Verificar com o analista Paulinho Marques se os parametros repeticoes e repete são obrigatorios na montagem.
+		/*
+		this.builderEvento.definirRepeticoes(repeticoes);
+		this.builderEvento.definirRepete(repete);*/
 	}
 }
