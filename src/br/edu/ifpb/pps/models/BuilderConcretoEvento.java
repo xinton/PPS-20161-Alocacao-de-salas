@@ -1,4 +1,4 @@
-package br.edu.ifpb.pps.controllers;
+package br.edu.ifpb.pps.models;
 
 public class BuilderConcretoEvento {
 
