@@ -1,6 +1,5 @@
 package br.edu.ifpb.pps.models;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
 
