@@ -1,5 +1,6 @@
 package br.edu.ifpb.pps.models;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -92,5 +93,28 @@ public class Evento {
 			throw new Exception("O valor da repetição do evento NÃO pode ser MENOR do que ZERO!");
 		this.repeticao = repeticao;
 		checaRepeticao();
+=======
+import java.util.Date;
+
+/**
+ * 
+ * @author home
+ *
+ */
+public class Evento {
+	private String nome, contato;
+	private Date dataIni, dataFim;
+	private int repeticao;
+	private boolean repete;
+	
+	public Evento(){}
+	
+	/**
+	 * 
+	 * @param sala
+	 */
+	public void alocarSala(Sala sala){
+		return;
+>>>>>>> bruno/master
 	}
 }
