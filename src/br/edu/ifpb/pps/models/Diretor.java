@@ -2,7 +2,7 @@ package br.edu.ifpb.pps.models;
 
 import java.util.Date;
 
-import br.edu.ifpb.pps.interfaces.IBuilderEvento;
+import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
 
 /**
  * Esta classe fará com que seja instaciado apenas um diretor.
