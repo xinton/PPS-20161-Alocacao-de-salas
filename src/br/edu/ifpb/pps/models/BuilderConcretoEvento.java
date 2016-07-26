@@ -2,7 +2,7 @@ package br.edu.ifpb.pps.models;
 
 import java.util.Date;
 
-import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
+import br.edu.ifpb.pps.interfaces.IBuilderEvento;
 
 public class BuilderConcretoEvento implements IBuilderEvento
 {

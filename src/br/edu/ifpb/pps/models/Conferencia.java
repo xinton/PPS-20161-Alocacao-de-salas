@@ -1,6 +1,6 @@
 package br.edu.ifpb.pps.models;
 
-import br.edu.ifpb.pps.controllers.IBridge;
+import br.edu.ifpb.pps.interfaces.IBridge;
 
 public class Conferencia implements IBridge{
 
