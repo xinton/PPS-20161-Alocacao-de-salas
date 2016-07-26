@@ -17,6 +17,7 @@ public class Diretor
 	private Diretor(){}
 	
 	/**
+	 * Este metodo realiza o retorno do unico diretor existente.
 	 * @author Matheus Mayer
 	 * @since 25/07/2016
 	 * @return Diretor unicoDiretor
