@@ -1,4 +1,4 @@
-package br.edu.ifpb.pps.interfaces;
+package br.edu.ifpb.pps.models.interfaces;
 
 import java.util.Date;
 

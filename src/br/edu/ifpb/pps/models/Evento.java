@@ -11,12 +11,10 @@ public class Evento {
 	private boolean repete;
 	private ArrayList<Sala> salas;
 	
-	public Evento(){
-		
-	}
+	public Evento(){}
 	
 	/**
-	 * Construtor da Classe Evento, O construtor já inicializa os atributos principais da classe.
+	 * Construtor da Classe Evento, O construtor jï¿½ inicializa os atributos principais da classe.
 	 * 
 	 * @param nomeEvento, contato, dataInicio, dataFim, repete
 	 * @author Diego Carvalho
@@ -31,9 +29,8 @@ public class Evento {
 		checaRepeticao();
 	}
 	
-	
 	/**
-	 * Metodo de alocação de uma sala a um Evento
+	 * Metodo de alocaï¿½ï¿½o de uma sala a um Evento
 	 * 
 	 * @param sala
 	 * @author Diego Carvalho
@@ -46,7 +43,7 @@ public class Evento {
 	}
 	
 	/**
-	 * Método que checa se o evento tem alguma repetição e altera a variavel repete (do tipo Boolean) para o estado atual.
+	 * Mï¿½todo que checa se o evento tem alguma repetiï¿½ï¿½o e altera a variavel repete (do tipo Boolean) para o estado atual.
 	 * 
 	 * @author Diego Carvalho
 	 * @since 25/07/2016
@@ -58,7 +55,6 @@ public class Evento {
 			repete = false;
 	}
 
-	
 	// *******************************************************
 	//                        GETs e SETs
 	// *******************************************************
@@ -84,16 +80,17 @@ public class Evento {
 	public void setDataInicio(Date dataInicio) { this.dataInicio = dataInicio; }
 
 	public void setDataFim(Date dataFim)       { this.dataFim = dataFim; }
-
+	
+	public void setRepete(boolean repete)	   { this.repete = repete; }
 	/**
-	 * Metodo para setar o número de repetições semanais do evento. Lança uma Exceção caso seja menor do que ZERO.
+	 * Metodo para setar o nï¿½mero de repetiï¿½ï¿½es semanais do evento. Lanï¿½a uma Exceï¿½ï¿½o caso seja menor do que ZERO.
 	 * 
 	 * @param repeticao
 	 * @throws Exception
 	 */
 	public void setRepeticao(int repeticao) throws Exception{ 
 		if(repeticao < 0)
-			throw new Exception("O valor da repetição do evento NÃO pode ser MENOR do que ZERO!");
+			throw new Exception("O valor da repetiï¿½ï¿½o do evento Nï¿½O pode ser MENOR do que ZERO!");
 		this.repeticao = repeticao;
 		checaRepeticao();
 	}
