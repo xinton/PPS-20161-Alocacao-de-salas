@@ -11,8 +11,9 @@ import br.edu.ifpb.pps.models.interfaces.IBridge;
 
 public abstract class ControladorSala {
 	private static ArrayList<Sala> salas = new ArrayList<Sala>();
+	private static int idSala = 1;
 	
-	public static ArrayList<Sala> getSalas() {
+	public static ArrayList<Sala> getSalas(){
 		return salas;
 	}
 
@@ -28,7 +29,6 @@ public abstract class ControladorSala {
 		this.idSala = idSala;
 	}
 
-	private int idSala = 1;
 	
 	public static void adicionarSala(String apelido, String tipo, int capacidade, int IDsala){
 		IBridge sala;	
@@ -43,8 +43,8 @@ public abstract class ControladorSala {
 			sala = new VideoConferencia();
 		}
 		
-		salas.add(new Sala(Integer.toString(this.idSala), apelido, tipo, capacidade, sala));
-		this.idSala += 1;
+		salas.add(new Sala(Integer.toString(idSala), apelido, tipo, capacidade, sala));
+		idSala += 1;
 	}
 	
 	/**
@@ -54,7 +54,11 @@ public abstract class ControladorSala {
 	eventos da base de dados.
  */
  public void removerSala(String idSala){
-	 
+	 for(Sala objeto : salas){
+		 if(objeto.getId().equals(idSala)){
+			 salas.remove(objeto);
+		 }
+	 }
  }
  
  public String listarSalas(){
