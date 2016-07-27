@@ -3,59 +3,109 @@ package br.edu.ifpb.pps.controllers;
 import java.util.ArrayList;
 import java.util.Date;
 
+import br.edu.ifpb.pps.models.BuilderConcretoEvento;
 import br.edu.ifpb.pps.models.Diretor;
 import br.edu.ifpb.pps.models.Evento;
+import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
 
 public abstract class ControladorEvento {
-	
+
 	private static ArrayList<Evento> eventos= new ArrayList<Evento>();
-	
+	private static Diretor diretor;
 	/**
-	 *  O usuário pode adicionar eventos ao sistema. Cada
+	 *  O usuï¿½rio pode adicionar eventos ao sistema. Cada
 	evento possui um nome, datas de inicio e fim, um
-	nome para contato e um numero de repetiçoes
-	semanais. Pode ser repetitivo ou não.
+	nome para contato e um numero de repetiï¿½oes
+	semanais. Pode ser repetitivo ou nï¿½o.
 	 */
-	public void adicionarEvento( String nome, Date dataIni,Date dataFim,String contato,int repeticoes,boolean repete ){
-		Diretor diretor = Diretor.getInstance();
-		diretor.construirEvento(nome, dataIni, dataFim, contato, repeticoes, repete);
+
+	public void inicializarDiretor()
+	{
+		diretor = Diretor.getInstance();
 	}
-	
+	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes, boolean repete )
+	{
+		IBuilderEvento builderEvento = new BuilderConcretoEvento();
+		diretor.setEvento(builderEvento);
+		diretor.construirEvento(nome, dataIni, dataFim, contato, repeticoes, repete);
+		adicionarEventosNaLista(diretor.getEvento());
+	}
+
 	/**
 	 * Deve-se alocar uma sala para um evento (repetitivo
-	ou não). O sistema deve informar as salas disponíveis
-	que satisfaçam as restrições do evento.
+	ou nï¿½o). O sistema deve informar as salas disponï¿½veis
+	que satisfaï¿½am as restriï¿½ï¿½es do evento.
 	 */
-	public void alocarEvento(){
-		
+	public void alocarEvento()
+	{
+
 	}
-	
+
 	/**
-	 *  O usuário pode localizar um evento escalonado
-	através do nome, contato, data etc.
+	 *  O usuï¿½rio pode localizar um evento escalonado
+	atravï¿½s do nome, contato, data etc.
 	 */
-	public Evento localizarEvento(){
-		
-		return null;
+	public static Evento localizarEvento(String nomeEvento, String contato, Date data) throws Exception 
+	{	
+		if (!nomeEvento.isEmpty()) {
+			return localizarEventoPorNome(nomeEvento);
+		}else if (!contato.isEmpty()) {
+			return localizarEventoPeloContato(contato);
+		}else throw new Exception("Nao foi possivel localizar o evento pretendido");
+		//return diretor.getEvento();
 	}
 	/**
-	 * O usuário pode desalocar um evento previamente
+	 * O usuï¿½rio pode desalocar um evento previamente
 	alocado.
 	 */
 	public void desalocarEvento(Evento evento){
+	}
+
+	/**
+	 * O usuï¿½rio pode cancelar um evento. Neste caso, o
+	cancelamento remove o evento da base de dados e
+	desvincula as possï¿½veis alocaï¿½ï¿½es previamente
+	computadas.
+	 */
+	public void cancelarEvento(Evento evento)
+	{
 		eventos.remove(evento);
+	}
+	/**
+	 * Este metodo adicionarÃ¡ cada evento na lista de eventos.
+	 * @author Matheus Mayer
+	 * @since 26/07/2016
+	 */
+	private static void adicionarEventosNaLista(Evento evento)
+	{
+		eventos.add(evento);
 	}
 	
 	/**
-	 * O usuário pode cancelar um evento. Neste caso, o
-	cancelamento remove o evento da base de dados e
-	desvincula as possíveis alocações previamente
-	computadas.
+	 * Este metodo localizarÃ¡ um evento pelo nome
+	 * @author Matheus Mayer
+	 * @param String nomeEvento
+	 * @return Evento evento || null
 	 */
-	public void cancelarEvento(){
+	private static Evento localizarEventoPorNome(String nomeEvento)
+	{
+		for (Evento evento: eventos) {	
+			if (evento.getNome().contains(nomeEvento)) {
+				return evento;
+			}
+		}
 		
+		return null;
 	}
 	
-	
-
+	private static Evento localizarEventoPeloContato(String nomeContato)
+	{
+		for (Evento evento: eventos) {
+			if (evento.getContato().contains(nomeContato)) {
+				return evento;
+			}
+		}
+		
+		return null;
+	}
 }
