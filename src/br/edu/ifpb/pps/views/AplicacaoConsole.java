@@ -128,7 +128,7 @@ public class AplicacaoConsole {
 		int repeticoes = scanner.nextInt();
 		scanner.nextLine();
 		
-		ControladorEvento.adicionarEvento(nomeEvento, dataInicio, dataFim, contato, repeticoes);
+		ControladorEvento.adicionarEvento(nomeEvento, dataInicio, dataFim, contato, repeticoes, false);
 	}
 	
 	private void alocarEvento(){

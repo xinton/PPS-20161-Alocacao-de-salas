@@ -30,7 +30,7 @@ public abstract class ControladorSala {
 
 	private int idSala = 1;
 	
-	public void adicionarSala(String apelido, String tipo, int capacidade, int IDsala){
+	public static void adicionarSala(String apelido, String tipo, int capacidade, int IDsala){
 		IBridge sala;	
 		
 		if(IDsala == 1){
@@ -65,9 +65,6 @@ public abstract class ControladorSala {
 	 }
 	 
 	 return null;
- }
+ } 
  
- public static ArrayList<Sala> getSalas(){
-	 return salas;
- }
 }
