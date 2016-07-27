@@ -1,6 +1,7 @@
 package br.edu.ifpb.pps.views;
 
 import java.awt.Event;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class AplicacaoConsole {
 	private static Scanner scanner = new Scanner(System.in);
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		AplicacaoConsole app = new AplicacaoConsole();
 		app.startVariables();
 		app.printaMenu();
@@ -26,7 +27,7 @@ public class AplicacaoConsole {
 		
 	}
 
-	private void printaMenu(){
+	private void printaMenu() throws ParseException{
 		System.out.println("");
 		System.out.println("###############################################################################");
 		System.out.println("#                               SALAS DE EVENTOS                              #");
@@ -46,7 +47,26 @@ public class AplicacaoConsole {
 		selecionaItemDoMenu();
 	}
 	
-	private void selecionaItemDoMenu(){
+	private void printaSubMenuLocalizar() throws ParseException{
+		System.out.println("");		
+		System.out.println("########################################");
+		System.out.println("#            Localizar por:            #");
+		System.out.println("#--------------------------------------#");
+		System.out.println("#      1. Nome			               #");
+		System.out.println("#                                      #");
+		System.out.println("#      2. Contado            		   #");
+		System.out.println("#                                      #");
+		System.out.println("#      3. Data Inicial       	       #");
+		System.out.println("#                                      #");
+		System.out.println("#      4. Data Final			       #");
+		System.out.println("#                                      #");
+		System.out.println("#      0. Voltar                       #");
+		System.out.println("#                                      #");
+		System.out.println("########################################");
+		System.out.println("");
+	}
+	
+	private void selecionaItemDoMenu() throws ParseException{
 		System.out.print("Digite uma Opção: ");
 		int selecao = scanner.nextInt();
 		scanner.nextLine();
@@ -108,7 +128,7 @@ public class AplicacaoConsole {
 		int repeticoes = scanner.nextInt();
 		scanner.nextLine();
 		
-		ControladorEvento.adicionarEvento(nomeEvento, dataInicio, dataFim, contato, repeticoes);
+		ControladorEvento.adicionarEvento(nomeEvento, dataInicio, dataFim, contato, repeticoes, false);
 	}
 	
 	private void alocarEvento(){
@@ -131,23 +151,98 @@ public class AplicacaoConsole {
 		count = 1;
 	}
 	
-	private void localizarEvento(){
+	private void localizarEvento() throws ParseException{
 		System.out.println("---------------------------- Localizar Evento ---------------------------------");
+		printaSubMenuLocalizar();
+
+		System.out.print("Digite uma Opção de busca: ");
+		int opLocalizar = scanner.nextInt();
+		scanner.nextLine();
+		Evento evento;
+		switch (opLocalizar) {
+        case 1:
+            System.out.println("Digite o nome");
+            String nome = scanner.nextLine();
+            evento = ControladorEvento.localizarEventoPorNome(nome);
+            if ( evento != null ) {
+            	System.out.println(evento);
+            } else {
+            	System.out.println("Evento não encontrado.");
+            }            
+            break;
+        case 2:
+            System.out.println("Digite o contato");
+            String contato = scanner.nextLine();
+            evento = ControladorEvento.localizarEventoPeloContato(contato);
+            if ( evento != null ) {
+            	System.out.println(evento);
+            } else {
+            	System.out.println("Evento não encontrado.");
+            }           
+            break;
+        case 3:
+            System.out.println("Digite a data inicial");
+            String dataIni = scanner.nextLine();
+            evento = ControladorEvento.localizarEventoDataInicial(dataIni);
+            if ( evento != null ) {
+            	System.out.println(evento);
+            } else {
+            	System.out.println("Evento não encontrado.");
+            }            
+            break;
+        case 4:
+            System.out.println("Digite a data final");
+            String dataFim = scanner.nextLine();
+            evento = ControladorEvento.localizarEventoDataFim(dataFim);
+            if ( evento != null ) {
+            	System.out.println(evento);
+            } else {
+            	System.out.println("Evento não encontrado.");
+            }            
+            break;
+        case 0:   
+        	printaMenu();
+            break;
+        default:
+             System.out.println("Este não é uma opção válida!");
+     }
+
 	}
 	
 	private void desalocarEvento(){
+		ArrayList<Evento> eventos = ControladorEvento.getEventos();
 		System.out.println("---------------------------- Desalocar Evento ---------------------------------");
-		
+		System.out.println("Digite o nome do evento para desalocar");
+		String eventoNome = scanner.nextLine();
+		Evento evento = null;
+		for(Evento ev: eventos)
+			if(ev.getNome().equals(eventoNome))
+				evento = ev;
+		ControladorEvento.desalocarEvento(evento);
 	}
 	
 	private void cancelarEvento(){
 		System.out.println("---------------------------- Cancelar Evento ----------------------------------");
-		
+		System.out.println("Digite o nome do evento para cancelar");
+		String evento = scanner.nextLine();
+		try {
+			ControladorEvento.cancelarEvento(evento);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Evento "+evento+" cancelado com sucesso!");	
 	}
 	
 	private void removerSala(){
 		System.out.println("------------------------------ Remover Sala -----------------------------------");
-		
+		System.out.println("Digite o nome de uma sala para remover");
+		String sala = scanner.nextLine();
+		try {
+			ControladorSala.removerSala(sala);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Sala "+sala+" removida com sucesso!");
 	}
 }
 
