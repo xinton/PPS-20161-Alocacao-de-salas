@@ -1,8 +1,5 @@
 package br.edu.ifpb.pps.controllers;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,18 +24,8 @@ public abstract class ControladorEvento {
 	{
 		diretor = Diretor.getInstance();
 	}
-	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes)
+	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes, boolean repete )
 	{
-		//debug -- apagar depois
-		System.out.println("nom: "+nome);
-		System.out.println("DIn: "+dataIni);
-		System.out.println("DFi: "+dataFim);
-		System.out.println("con: "+contato);
-		System.out.println("rep: "+repeticoes);
-		//debug -- apagar depois
-		
-		
-		
 		IBuilderEvento builderEvento = new BuilderConcretoEvento();
 		diretor.setEvento(builderEvento);
 		diretor.construirEvento(nome, dataIni, dataFim, contato, repeticoes);
@@ -147,44 +134,4 @@ public abstract class ControladorEvento {
 		
 		return null;
 	}
-	
-	/**
-	 * Este metodo localizar um evento pela data inicial
-	 * @author Washington
-	 * @param String data
-	 * @return Evento evento || null
-	 */
-	private static Evento localizarEventoDataInicial(String data) throws ParseException 
-	{			
-		// usuario tem que digitar assim -> dd/mm/aaaa
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = format.parse(data);
-		for (Evento evento: eventos) {
-			if (evento.getDataInicio().equals(date)  ) {
-				return evento;
-			}
-		}
-		
-		return null;
-	}
-	
-	private static Evento localizarEventoDataFim(String data) throws ParseException 
-	{			
-		// usuario tem que digitar assim -> dd/mm/aaaa
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = format.parse(data);
-		for (Evento evento: eventos) {
-			if (evento.getDataFim().equals(date)  ) {
-				return evento;
-			}
-		}
-		
-		return null;
-	}
-
-	
-	public static ArrayList<Evento> getEventos(){
-		return eventos;
-	}
-
 }
