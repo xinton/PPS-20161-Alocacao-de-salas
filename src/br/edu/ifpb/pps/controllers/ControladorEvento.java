@@ -57,9 +57,6 @@ public abstract class ControladorEvento {
 		//return salasDisponiveis;
 	}
 
-	public static ArrayList<Evento> getEventos() {
-		return eventos;
-	}
 	public static void setEventos(ArrayList<Evento> eventos) {
 		ControladorEvento.eventos = eventos;
 	}
@@ -95,15 +92,22 @@ public abstract class ControladorEvento {
 	cancelamento remove o evento da base de dados e
 	desvincula as poss�veis aloca��es previamente
 	computadas.
+	 * @throws Exception 
 	 */
-	public void cancelarEvento(Evento evento)
+	public void cancelarEvento(String nomeEvento) throws Exception
 	{
-		eventos.remove(evento);
+		Evento evento = localizarEventoPorNome(nomeEvento);
+		if (evento == null) {
+			throw new Exception ("Evento não existente");
+		}
+		desalocarEvento(evento);
+		removerEvento(evento);
 	}
 	/**
 	 * Este metodo adicionará cada evento na lista de eventos.
 	 * @author Matheus Mayer
 	 * @since 26/07/2016
+	 * @param Evento evento
 	 */
 	private static void adicionarEventosNaLista(Evento evento)
 	{
@@ -126,7 +130,12 @@ public abstract class ControladorEvento {
 		
 		return null;
 	}
-	
+	/**
+	 * Este metodo localizará o evento pelo contato do mesmo.
+	 * @author Matheus Mayer
+	 * @param String nomeContato
+	 * @return Evento evento || null
+	 */
 	public static Evento localizarEventoPeloContato(String nomeContato)
 	{
 		for (Evento evento: eventos) {
@@ -137,7 +146,10 @@ public abstract class ControladorEvento {
 		
 		return null;
 	}
-	
+
+	public static ArrayList<Evento> getEventos(){
+		return eventos;
+		}	
 	/**
 	 * Este metodo localizar um evento pela data inicial
 	 * @author Washington
@@ -171,5 +183,14 @@ public abstract class ControladorEvento {
 		
 		return null;
 	}
-
+	/**
+	 * Este metodo fará com que o evento seja removido da base de dados
+	 * @author Matheus Mayer
+	 * @param Evento evento
+	 * @since 26/07/2016
+	 */
+	private static void removerEvento(Evento evento)
+	{
+		eventos.remove(evento);
+	}
 }
