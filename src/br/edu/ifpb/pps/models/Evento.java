@@ -11,13 +11,10 @@ public class Evento {
 	private boolean repete;
 	private ArrayList<Sala> salas;
 	
-	
-	public Evento(){
-		
-	}
+	public Evento(){}
 	
 	/**
-	 * Construtor da Classe Evento, O construtor já inicializa os atributos principais da classe.
+	 * Construtor da Classe Evento, O construtor ja inicializa os atributos principais da classe.
 	 * 
 	 * @param nomeEvento, contato, dataInicio, dataFim, repete
 	 * @author Diego Carvalho
@@ -32,9 +29,8 @@ public class Evento {
 		checaRepeticao();
 	}
 	
-	
 	/**
-	 * Metodo de alocação de uma sala a um Evento
+	 * Metodo de alocacao de uma sala a um Evento
 	 * 
 	 * @param sala
 	 * @author Diego Carvalho
@@ -47,7 +43,7 @@ public class Evento {
 	}
 	
 	/**
-	 * Método que checa se o evento tem alguma repetição e altera a variavel repete (do tipo Boolean) para o estado atual.
+	 * Metodo que checa se o evento tem alguma repeticao e altera a variavel repete (do tipo Boolean) para o estado atual.
 	 * 
 	 * @author Diego Carvalho
 	 * @since 25/07/2016
@@ -59,7 +55,6 @@ public class Evento {
 			repete = false;
 	}
 
-	
 	// *******************************************************
 	//                        GETs e SETs
 	// *******************************************************
@@ -77,6 +72,8 @@ public class Evento {
 	
 	public boolean isRepete()   { return repete; }
 	
+	public int getNumeroDeSalas(){ return salas.size(); }
+	
 	// **************** SETs *********************
 	public void setNome(String nome)           { this.nome = nome; }
 
@@ -85,16 +82,18 @@ public class Evento {
 	public void setDataInicio(Date dataInicio) { this.dataInicio = dataInicio; }
 
 	public void setDataFim(Date dataFim)       { this.dataFim = dataFim; }
-
+	
+	public void setRepete(boolean repete)	   { this.repete = repete; }
+	
 	/**
-	 * Metodo para setar o número de repetições semanais do evento. Lança uma Exceção caso seja menor do que ZERO.
+	 * Metodo para setar o numero de repeticoes semanais do evento. Lavanta uma Excecao caso seja menor do que ZERO.
 	 * 
 	 * @param repeticao
 	 * @throws Exception
 	 */
 	public void setRepeticao(int repeticao) throws Exception{ 
 		if(repeticao < 0)
-			throw new Exception("O valor da repetição do evento NÃO pode ser MENOR do que ZERO!");
+			throw new Exception("O valor da repeticao do evento NAO pode ser MENOR do que ZERO!");
 		this.repeticao = repeticao;
 		checaRepeticao();
 	}

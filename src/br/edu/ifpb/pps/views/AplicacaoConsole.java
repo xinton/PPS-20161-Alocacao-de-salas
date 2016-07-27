@@ -1,10 +1,13 @@
 package br.edu.ifpb.pps.views;
 
+import java.awt.Event;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 import br.edu.ifpb.pps.controllers.ControladorEvento;
 import br.edu.ifpb.pps.controllers.ControladorSala;
+import br.edu.ifpb.pps.models.Evento;
 
 
 public class AplicacaoConsole {
@@ -108,7 +111,17 @@ public class AplicacaoConsole {
 	}
 	
 	private void alocarEvento(){
+		ArrayList<Evento> eventos = ControladorEvento.getEventos();
 		System.out.println("------------------------------ Alocar Evento ----------------------------------");
+		System.out.println("Lista de Eventos sem sala...");
+		int count = 1;
+		for(Evento evento: eventos){
+			if(evento.getNumeroDeSalas()==0)
+				continue;
+			System.out.println("Nome: "+evento.getNome()+" | ");
+			count++;
+		}
+		
 	}
 	
 	private void localizarEvento(){

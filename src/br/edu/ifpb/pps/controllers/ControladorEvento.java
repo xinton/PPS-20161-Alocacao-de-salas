@@ -118,4 +118,8 @@ public abstract class ControladorEvento {
 		
 		return null;
 	}
+	
+	public static ArrayList<Evento> getEventos(){
+		return eventos;
+	}
 }
