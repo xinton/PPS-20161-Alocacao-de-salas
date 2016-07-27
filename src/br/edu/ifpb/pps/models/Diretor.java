@@ -50,7 +50,7 @@ public class Diretor
 		this.builderEvento = builderEvento;
 	}
 	
-	public void construirEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes, boolean repete)
+	public void construirEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes)
 	{
 		this.builderEvento.criarNovoEvento();
 		this.builderEvento.definirNome(nome);
@@ -58,6 +58,4 @@ public class Diretor
 		this.builderEvento.definirDataFim(dataFim);
 		this.builderEvento.definirContato(contato);
 		this.builderEvento.definirRepeticoes(repeticoes);
-		this.builderEvento.definirRepete(repete);
 	}
-}

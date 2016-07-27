@@ -17,6 +17,4 @@ public interface IBuilderEvento
 	public void definirDataFim(Date dataFim);
 	public void definirContato(String contato);
 	public void definirRepeticoes(int repeticoes);
-	//TODO TROCAR ESTE NOME PARA IS!
-	public void definirRepete(boolean repete);
 }
