@@ -1,11 +1,15 @@
 package br.edu.ifpb.pps.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import br.edu.ifpb.pps.models.BuilderConcretoEvento;
 import br.edu.ifpb.pps.models.Diretor;
 import br.edu.ifpb.pps.models.Evento;
+import br.edu.ifpb.pps.models.Sala;
 import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
 
 public abstract class ControladorEvento {
@@ -23,18 +27,8 @@ public abstract class ControladorEvento {
 	{
 		diretor = Diretor.getInstance();
 	}
-	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes)
+	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes, boolean repete )
 	{
-		//debug -- apagar depois
-		System.out.println("nom: "+nome);
-		System.out.println("DIn: "+dataIni);
-		System.out.println("DFi: "+dataFim);
-		System.out.println("con: "+contato);
-		System.out.println("rep: "+repeticoes);
-		//debug -- apagar depois
-		
-		
-		
 		IBuilderEvento builderEvento = new BuilderConcretoEvento();
 		diretor.setEvento(builderEvento);
 		diretor.construirEvento(nome, dataIni, dataFim, contato, repeticoes);
@@ -46,11 +40,32 @@ public abstract class ControladorEvento {
 	ou n�o). O sistema deve informar as salas dispon�veis
 	que satisfa�am as restri��es do evento.
 	 */
-	public void alocarEvento()
+	public void alocarEvento(Sala sala, Evento evento)
 	{
-
+		evento.alocarSala(sala);
+		sala.registrarEvento(evento);
+				
+		ArrayList<Sala> salas = ControladorSala.getSalas();
+		ArrayList<Sala> salasDisponiveis = new ArrayList<Sala>();
+		
+		for(Sala opcao : salas){
+			if(opcao.getSala() == sala.getSala() && opcao.getEventos().isEmpty()){
+				salasDisponiveis.add(opcao);
+			}
+		}
+		
+		//return salasDisponiveis;
 	}
 
+	public static void setEventos(ArrayList<Evento> eventos) {
+		ControladorEvento.eventos = eventos;
+	}
+	public static Diretor getDiretor() {
+		return diretor;
+	}
+	public static void setDiretor(Diretor diretor) {
+		ControladorEvento.diretor = diretor;
+	}
 	/**
 	 *  O usu�rio pode localizar um evento escalonado
 	atrav�s do nome, contato, data etc.
@@ -69,6 +84,7 @@ public abstract class ControladorEvento {
 	alocado.
 	 */
 	public void desalocarEvento(Evento evento){
+		
 	}
 
 	/**
@@ -104,7 +120,7 @@ public abstract class ControladorEvento {
 	 * @param String nomeEvento
 	 * @return Evento evento || null
 	 */
-	private static Evento localizarEventoPorNome(String nomeEvento)
+	public static Evento localizarEventoPorNome(String nomeEvento)
 	{
 		for (Evento evento: eventos) {	
 			if (evento.getNome().contains(nomeEvento)) {
@@ -120,7 +136,7 @@ public abstract class ControladorEvento {
 	 * @param String nomeContato
 	 * @return Evento evento || null
 	 */
-	private static Evento localizarEventoPeloContato(String nomeContato)
+	public static Evento localizarEventoPeloContato(String nomeContato)
 	{
 		for (Evento evento: eventos) {
 			if (evento.getContato().contains(nomeContato)) {
@@ -133,6 +149,39 @@ public abstract class ControladorEvento {
 
 	public static ArrayList<Evento> getEventos(){
 		return eventos;
+		}	
+	/**
+	 * Este metodo localizar um evento pela data inicial
+	 * @author Washington
+	 * @param String data
+	 * @return Evento evento || null
+	 */
+	public static Evento localizarEventoDataInicial(String data) throws ParseException 
+	{			
+		// usuario tem que digitar assim -> dd/mm/aaaa
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(data);
+		for (Evento evento: eventos) {
+			if (evento.getDataInicio().equals(date)  ) {
+				return evento;
+			}
+		}
+		
+		return null;
+	}
+	
+	public static Evento localizarEventoDataFim(String data) throws ParseException 
+	{			
+		// usuario tem que digitar assim -> dd/mm/aaaa
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(data);
+		for (Evento evento: eventos) {
+			if (evento.getDataFim().equals(date)  ) {
+				return evento;
+			}
+		}
+		
+		return null;
 	}
 	/**
 	 * Este metodo fará com que o evento seja removido da base de dados
@@ -144,7 +193,4 @@ public abstract class ControladorEvento {
 	{
 		eventos.remove(evento);
 	}
-	
-	//private static void isEventoExistente(String nome){}
-
 }
