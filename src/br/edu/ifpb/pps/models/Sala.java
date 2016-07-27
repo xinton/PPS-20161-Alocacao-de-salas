@@ -14,7 +14,9 @@ public class Sala {
 		this.capacidade = capacidade;
 		this.sala = sala;
 	}
-	
+	/**
+	 * @author Pedro Paiva
+	 */
 	public void salaFuncao(){
 		sala.funcao(tipo, apelido);
 	}
