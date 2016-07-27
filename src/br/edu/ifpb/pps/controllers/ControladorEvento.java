@@ -1,5 +1,8 @@
 package br.edu.ifpb.pps.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -112,6 +115,40 @@ public abstract class ControladorEvento {
 	{
 		for (Evento evento: eventos) {
 			if (evento.getContato().contains(nomeContato)) {
+				return evento;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Este metodo localizar um evento pela data inicial
+	 * @author Washington
+	 * @param String data
+	 * @return Evento evento || null
+	 */
+	private static Evento localizarEventoDataInicial(String data) throws ParseException 
+	{			
+		// usuario tem que digitar assim -> dd/mm/aaaa
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(data);
+		for (Evento evento: eventos) {
+			if (evento.getDataInicio().equals(date)  ) {
+				return evento;
+			}
+		}
+		
+		return null;
+	}
+	
+	private static Evento localizarEventoDataFim(String data) throws ParseException 
+	{			
+		// usuario tem que digitar assim -> dd/mm/aaaa
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(data);
+		for (Evento evento: eventos) {
+			if (evento.getDataFim().equals(date)  ) {
 				return evento;
 			}
 		}
