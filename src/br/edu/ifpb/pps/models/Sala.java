@@ -1,6 +1,6 @@
 package br.edu.ifpb.pps.models;
 
-import br.edu.ifpb.pps.interfaces.IBridge;
+import br.edu.ifpb.pps.models.interfaces.IBridge;
 
 public class Sala {
 	private String id, apelido, tipo;
