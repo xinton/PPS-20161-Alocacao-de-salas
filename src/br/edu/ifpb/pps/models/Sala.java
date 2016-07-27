@@ -1,10 +1,23 @@
 package br.edu.ifpb.pps.models;
 
+import br.edu.ifpb.pps.interfaces.IBridge;
+
 public class Sala {
 	private String id, apelido, tipo;
 	private int capacidade;
+	private IBridge sala;
 	
-	public Sala() {}
+	public Sala(String id, String apelido, String tipo, int capacidade, IBridge sala) {
+		this.id = id;
+		this.apelido = apelido;
+		this.tipo = tipo;
+		this.capacidade = capacidade;
+		this.sala = sala;
+	}
+	
+	public void salaFuncao(){
+		sala.funcao(tipo, apelido);
+	}
 	
 	public String getId() {
 		return id;
@@ -30,8 +43,4 @@ public class Sala {
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
 	}
-	
-	
-	
-
 }
