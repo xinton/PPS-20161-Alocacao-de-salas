@@ -1,11 +1,14 @@
 package br.edu.ifpb.pps.models;
 
+import java.util.ArrayList;
+
 import br.edu.ifpb.pps.models.interfaces.IBridge;
 
 public class Sala {
 	private String id, apelido, tipo;
 	private int capacidade;
 	private IBridge sala;
+	private ArrayList<Evento> eventos;
 	
 	public Sala(String id, String apelido, String tipo, int capacidade, IBridge sala) {
 		this.id = id;
@@ -44,5 +47,23 @@ public class Sala {
 	}
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
+	}
+	
+	public void registrarEvento(Evento evento){
+		if(eventos == null)
+			eventos = new ArrayList<Evento>();
+		eventos.add(evento);
+	}
+	public IBridge getSala() {
+		return sala;
+	}
+	public void setSala(IBridge sala) {
+		this.sala = sala;
+	}
+	public ArrayList<Evento> getEventos() {
+		return eventos;
+	}
+	public void setEventos(ArrayList<Evento> eventos) {
+		this.eventos = eventos;
 	}
 }
