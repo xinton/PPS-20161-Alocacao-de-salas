@@ -1,11 +1,11 @@
 package br.edu.ifpb.pps.models;
 
-import br.edu.ifpb.pps.controllers.IBridge;
+import br.edu.ifpb.pps.models.interfaces.IBridge;
 
 public class Aula implements IBridge{
 	@Override
 	public void funcao(String tipo, String apelido) {
-		System.out.print("Código da sala de aula: " + tipo + ".");
-		System.out.println("Descrição: "+ apelido + ".");
+		System.out.print("Cï¿½digo da sala de aula: " + tipo + ".");
+		System.out.println("Descriï¿½ï¿½o: "+ apelido + ".");
 	}
 }

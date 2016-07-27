@@ -45,6 +45,11 @@ public class Diretor
 		return this.builderEvento.getEvento();
 	}
 	
+	public void setEvento(IBuilderEvento builderEvento)
+	{
+		this.builderEvento = builderEvento;
+	}
+	
 	public void construirEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes, boolean repete)
 	{
 		this.builderEvento.criarNovoEvento();
@@ -52,9 +57,7 @@ public class Diretor
 		this.builderEvento.definirDataInicio(dataIni);
 		this.builderEvento.definirDataFim(dataFim);
 		this.builderEvento.definirContato(contato);
-		//Verificar com o analista Paulinho Marques se os parametros repeticoes e repete são obrigatorios na montagem.
-		/*
 		this.builderEvento.definirRepeticoes(repeticoes);
-		this.builderEvento.definirRepete(repete);*/
+		this.builderEvento.definirRepete(repete);
 	}
 }
