@@ -59,3 +59,4 @@ public class Diretor
 		this.builderEvento.definirContato(contato);
 		this.builderEvento.definirRepeticoes(repeticoes);
 	}
+}

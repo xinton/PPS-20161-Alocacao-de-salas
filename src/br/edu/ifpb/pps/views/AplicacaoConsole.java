@@ -8,6 +8,7 @@ import java.util.Scanner;
 import br.edu.ifpb.pps.controllers.ControladorEvento;
 import br.edu.ifpb.pps.controllers.ControladorSala;
 import br.edu.ifpb.pps.models.Evento;
+import br.edu.ifpb.pps.models.Sala;
 
 
 public class AplicacaoConsole {
@@ -112,6 +113,7 @@ public class AplicacaoConsole {
 	
 	private void alocarEvento(){
 		ArrayList<Evento> eventos = ControladorEvento.getEventos();
+		ArrayList<Sala> salas = ControladorSala.getSalas();
 		System.out.println("------------------------------ Alocar Evento ----------------------------------");
 		System.out.println("Lista de Eventos sem sala...");
 		int count = 1;
@@ -121,8 +123,12 @@ public class AplicacaoConsole {
 			System.out.println("Id: "+count+" | Nome: "+evento.getNome()+" | Data Inicio: "+evento.getDataInicio()+" |");
 			count++;
 		}
-
-		
+		System.out.println("Escolha o Evento para alocar uma sala: ");
+		int idEvento = scanner.nextInt();
+		scanner.nextLine();
+		System.out.println("Evento "+eventos.get(idEvento).getNome()+" escolhido para alocar uma Sala.");
+		System.out.println("Lista de Salas para alocar...");
+		count = 1;
 	}
 	
 	private void localizarEvento(){
