@@ -48,12 +48,12 @@ public abstract class ControladorSala {
 	}
 	
 	/**
- 	O usuário pode remover salas do sistema. A remoçao
-	de uma sala também remove as possíveis alocações
-	que referem a mesma, mas não exclui os respectivos
+ 	O usuï¿½rio pode remover salas do sistema. A remoï¿½ao
+	de uma sala tambï¿½m remove as possï¿½veis alocaï¿½ï¿½es
+	que referem a mesma, mas nï¿½o exclui os respectivos
 	eventos da base de dados.
  */
- public static void removerSala(String idSala){
+ public void removerSala(String idSala){
 	 
  }
  
