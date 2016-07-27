@@ -100,7 +100,7 @@ public abstract class ControladorEvento {
 	 * @param String nomeEvento
 	 * @return Evento evento || null
 	 */
-	private static Evento localizarEventoPorNome(String nomeEvento)
+	public static Evento localizarEventoPorNome(String nomeEvento)
 	{
 		for (Evento evento: eventos) {	
 			if (evento.getNome().contains(nomeEvento)) {
@@ -111,7 +111,7 @@ public abstract class ControladorEvento {
 		return null;
 	}
 	
-	private static Evento localizarEventoPeloContato(String nomeContato)
+	public static Evento localizarEventoPeloContato(String nomeContato)
 	{
 		for (Evento evento: eventos) {
 			if (evento.getContato().contains(nomeContato)) {
@@ -128,7 +128,7 @@ public abstract class ControladorEvento {
 	 * @param String data
 	 * @return Evento evento || null
 	 */
-	private static Evento localizarEventoDataInicial(String data) throws ParseException 
+	public static Evento localizarEventoDataInicial(String data) throws ParseException 
 	{			
 		// usuario tem que digitar assim -> dd/mm/aaaa
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -142,7 +142,7 @@ public abstract class ControladorEvento {
 		return null;
 	}
 	
-	private static Evento localizarEventoDataFim(String data) throws ParseException 
+	public static Evento localizarEventoDataFim(String data) throws ParseException 
 	{			
 		// usuario tem que digitar assim -> dd/mm/aaaa
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
