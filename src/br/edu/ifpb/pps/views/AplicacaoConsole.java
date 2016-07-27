@@ -1,6 +1,5 @@
 package br.edu.ifpb.pps.views;
 
-import java.awt.Event;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -115,6 +114,7 @@ public class AplicacaoConsole {
 		ArrayList<Evento> eventos = ControladorEvento.getEventos();
 		ArrayList<Sala> salas = ControladorSala.getSalas();
 		System.out.println("------------------------------ Alocar Evento ----------------------------------");
+		//Listagem de Eventos ----------------------------------------------------------------------------
 		System.out.println("Lista de Eventos sem sala...");
 		int count = 1;
 		for(Evento evento: eventos){
@@ -124,30 +124,65 @@ public class AplicacaoConsole {
 			count++;
 		}
 		System.out.println("Escolha o Evento para alocar uma sala: ");
-		int idEvento = scanner.nextInt();
+		int idEvento = scanner.nextInt()-1;
 		scanner.nextLine();
 		System.out.println("Evento "+eventos.get(idEvento).getNome()+" escolhido para alocar uma Sala.");
+		
+		//Listagem de salas ----------------------------------------------------------------------------
 		System.out.println("Lista de Salas para alocar...");
 		count = 1;
+		for(Sala sala: salas){
+			System.out.println("Id: "+count+" Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade());
+			count++;
+		}
+		System.out.println("Escolha uma sala para alocar a um evento: ");
+		int idSala = scanner.nextInt()-1;
+		scanner.nextLine();
+		
+		ControladorEvento.alocarEvento(salas.get(idSala), eventos.get(idEvento));
+		System.out.println("Evento "+eventos.get(idEvento).getNome()+" alocado na sala "+salas.get(idSala).getApelido());
 	}
 	
 	private void localizarEvento(){
 		System.out.println("---------------------------- Localizar Evento ---------------------------------");
+		System.out.println("Digite o nome ou o contato");
+		
 	}
 	
 	private void desalocarEvento(){
+		ArrayList<Evento> eventos = ControladorEvento.getEventos();
 		System.out.println("---------------------------- Desalocar Evento ---------------------------------");
-		
+		System.out.println("Digite o nome do evento para desalocar");
+		String eventoNome = scanner.nextLine();
+		Evento evento = null;
+		for(Evento ev: eventos)
+			if(ev.getNome().equals(eventoNome))
+				evento = ev;
+		ControladorEvento.desalocarEvento(evento);
 	}
 	
 	private void cancelarEvento(){
 		System.out.println("---------------------------- Cancelar Evento ----------------------------------");
-		
+		System.out.println("Digite o nome do evento para cancelar");
+		String evento = scanner.nextLine();
+		try {
+			ControladorEvento.cancelarEvento(evento);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Evento "+evento+" cancelado com sucesso!");
 	}
 	
 	private void removerSala(){
 		System.out.println("------------------------------ Remover Sala -----------------------------------");
-		
+		System.out.println("Digite o nome de uma sala para remover");
+		String sala = scanner.nextLine();
+		try {
+			ControladorSala.removerSala(sala);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Sala "+sala+" removida com sucesso!");
 	}
 }
 
