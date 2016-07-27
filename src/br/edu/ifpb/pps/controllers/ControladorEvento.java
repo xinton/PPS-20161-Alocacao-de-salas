@@ -9,6 +9,7 @@ import java.util.Date;
 import br.edu.ifpb.pps.models.BuilderConcretoEvento;
 import br.edu.ifpb.pps.models.Diretor;
 import br.edu.ifpb.pps.models.Evento;
+import br.edu.ifpb.pps.models.Sala;
 import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
 
 public abstract class ControladorEvento {
@@ -49,11 +50,35 @@ public abstract class ControladorEvento {
 	ou n�o). O sistema deve informar as salas dispon�veis
 	que satisfa�am as restri��es do evento.
 	 */
-	public void alocarEvento()
+	public void alocarEvento(Sala sala, Evento evento)
 	{
-
+		evento.alocarSala(sala);
+		sala.registrarEvento(evento);
+				
+		ArrayList<Sala> salas = ControladorSala.getSalas();
+		ArrayList<Sala> salasDisponiveis = new ArrayList<Sala>();
+		
+		for(Sala opcao : salas){
+			if(opcao.getSala() == sala.getSala() && opcao.getEventos().isEmpty()){
+				salasDisponiveis.add(opcao);
+			}
+		}
+		
+		//return salasDisponiveis;
 	}
 
+	public static ArrayList<Evento> getEventos() {
+		return eventos;
+	}
+	public static void setEventos(ArrayList<Evento> eventos) {
+		ControladorEvento.eventos = eventos;
+	}
+	public static Diretor getDiretor() {
+		return diretor;
+	}
+	public static void setDiretor(Diretor diretor) {
+		ControladorEvento.diretor = diretor;
+	}
 	/**
 	 *  O usu�rio pode localizar um evento escalonado
 	atrav�s do nome, contato, data etc.
@@ -72,6 +97,7 @@ public abstract class ControladorEvento {
 	alocado.
 	 */
 	public void desalocarEvento(Evento evento){
+		
 	}
 
 	/**

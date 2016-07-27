@@ -2,51 +2,68 @@ package br.edu.ifpb.pps.controllers;
 
 import java.util.ArrayList;
 
+import br.edu.ifpb.pps.models.Aula;
+import br.edu.ifpb.pps.models.Conferencia;
+import br.edu.ifpb.pps.models.Laboratorio;
 import br.edu.ifpb.pps.models.Sala;
-
-
+import br.edu.ifpb.pps.models.VideoConferencia;
+import br.edu.ifpb.pps.models.interfaces.IBridge;
 
 public abstract class ControladorSala {
-	
 	private static ArrayList<Sala> salas = new ArrayList<Sala>();
 	
-	/**
-	 * O usuï¿½rio pode adicionar salas ao sistema. Existem
-	diferentes tipos de sala: aula normal, laboratï¿½rio,
-	conferï¿½ncia e videoconferï¿½ncia. Cada sala tem uma
-	capacidade fï¿½sica. Cada sala possui uma identificaï¿½ï¿½o
-	ï¿½nica: abreviaï¿½ï¿½o do prï¿½dio seguido de um nï¿½mero
-	(Exemplo: UAI04). Algumas salas possuem apelidos
-	(Exemplo: Auditï¿½rio Fulando de Tal).
-	 */
-	public static void adicionarSala(String salaId, String salaApelido, int salaCapacidade, int tipoSala){
-		//TODO ver o bridge
+	public static ArrayList<Sala> getSalas() {
+		return salas;
+	}
+
+	public static void setSalas(ArrayList<Sala> salas) {
+		ControladorSala.salas = salas;
+	}
+
+	public int getIdSala() {
+		return idSala;
+	}
+
+	public void setIdSala(int idSala) {
+		this.idSala = idSala;
+	}
+
+	private int idSala = 1;
+	
+	public void adicionarSala(String apelido, String tipo, int capacidade, int IDsala){
+		IBridge sala;	
 		
-		//debug -- apagar depois
-		System.out.println("ide: "+salaId);
-		System.out.println("ape: "+salaApelido);
-		System.out.println("cap: "+salaCapacidade);
-		System.out.println("tip: "+tipoSala);
-		//debug -- apagar depois
+		if(IDsala == 1){
+			sala = new Aula();
+		}else if(IDsala == 2){
+			sala = new Laboratorio();
+		}else if(IDsala == 3){
+			sala = new Conferencia(); 
+		}else{
+			sala = new VideoConferencia();
+		}
 		
-		
-		
-		//criar switch case com enum dos tipos de sala (se eh q vai ser feito assim!!!)
-		//adicionar no arraylist
-		
+		salas.add(new Sala(Integer.toString(this.idSala), apelido, tipo, capacidade, sala));
+		this.idSala += 1;
 	}
 	
 	/**
- 	O usuï¿½rio pode remover salas do sistema. A remoï¿½ao
-	de uma sala tambï¿½m remove as possï¿½veis alocaï¿½ï¿½es
-	que referem a mesma, mas nï¿½o exclui os respectivos
+ 	O usuário pode remover salas do sistema. A remoçao
+	de uma sala também remove as possíveis alocações
+	que referem a mesma, mas não exclui os respectivos
 	eventos da base de dados.
  */
- public static void removerSala(){
+ public void removerSala(String idSala){
 	 
  }
  
- public static String listarSalas(){
+ public String listarSalas(){
+	 String result = "";
+	 
+	 for(Sala sala : salas){
+		 result += "";
+	 }
+	 
 	 return null;
  }
  
