@@ -49,4 +49,8 @@ public abstract class ControladorSala {
  public static String listarSalas(){
 	 return null;
  }
+ 
+ public static ArrayList<Sala> getSalas(){
+	 return salas;
+ }
 }

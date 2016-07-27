@@ -53,10 +53,4 @@ public class BuilderConcretoEvento implements IBuilderEvento
 			// AJEITAR ISSO AQUI DEPOIS HEIIIN!!! e.printStackTrace(); 
 		}	
 	}
-
-	@Override
-	public void definirRepete(boolean repete) 
-	{
-		this.evento.setRepete(repete);	
-	}
 }
