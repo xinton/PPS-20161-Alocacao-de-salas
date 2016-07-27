@@ -118,9 +118,10 @@ public class AplicacaoConsole {
 		for(Evento evento: eventos){
 			if(evento.getNumeroDeSalas()==0)
 				continue;
-			System.out.println("Nome: "+evento.getNome()+" | ");
+			System.out.println("Id: "+count+" | Nome: "+evento.getNome()+" | Data Inicio: "+evento.getDataInicio()+" |");
 			count++;
 		}
+
 		
 	}
 	
