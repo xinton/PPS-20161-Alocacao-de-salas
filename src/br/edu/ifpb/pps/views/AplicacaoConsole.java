@@ -210,18 +210,39 @@ public class AplicacaoConsole {
 	}
 	
 	private void desalocarEvento(){
+		ArrayList<Evento> eventos = ControladorEvento.getEventos();
 		System.out.println("---------------------------- Desalocar Evento ---------------------------------");
-		
+		System.out.println("Digite o nome do evento para desalocar");
+		String eventoNome = scanner.nextLine();
+		Evento evento = null;
+		for(Evento ev: eventos)
+			if(ev.getNome().equals(eventoNome))
+				evento = ev;
+		ControladorEvento.desalocarEvento(evento);
 	}
 	
 	private void cancelarEvento(){
 		System.out.println("---------------------------- Cancelar Evento ----------------------------------");
-		
+		System.out.println("Digite o nome do evento para cancelar");
+		String evento = scanner.nextLine();
+		try {
+			ControladorEvento.cancelarEvento(evento);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Evento "+evento+" cancelado com sucesso!");	
 	}
 	
 	private void removerSala(){
 		System.out.println("------------------------------ Remover Sala -----------------------------------");
-		
+		System.out.println("Digite o nome de uma sala para remover");
+		String sala = scanner.nextLine();
+		try {
+			ControladorSala.removerSala(sala);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Sala "+sala+" removida com sucesso!");
 	}
 }
 
