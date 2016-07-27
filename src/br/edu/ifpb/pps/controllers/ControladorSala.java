@@ -11,13 +11,13 @@ public abstract class ControladorSala {
 	private static ArrayList<Sala> salas = new ArrayList<Sala>();
 	
 	/**
-	 * O usuário pode adicionar salas ao sistema. Existem
-	diferentes tipos de sala: aula normal, laboratório,
-	conferência e videoconferência. Cada sala tem uma
-	capacidade física. Cada sala possui uma identificação
-	única: abreviação do prédio seguido de um número
+	 * O usuï¿½rio pode adicionar salas ao sistema. Existem
+	diferentes tipos de sala: aula normal, laboratï¿½rio,
+	conferï¿½ncia e videoconferï¿½ncia. Cada sala tem uma
+	capacidade fï¿½sica. Cada sala possui uma identificaï¿½ï¿½o
+	ï¿½nica: abreviaï¿½ï¿½o do prï¿½dio seguido de um nï¿½mero
 	(Exemplo: UAI04). Algumas salas possuem apelidos
-	(Exemplo: Auditório Fulando de Tal).
+	(Exemplo: Auditï¿½rio Fulando de Tal).
 	 */
 	public static void adicionarSala(String salaId, String salaApelido, int salaCapacidade, int tipoSala){
 		//TODO ver o bridge
@@ -37,9 +37,9 @@ public abstract class ControladorSala {
 	}
 	
 	/**
- 	O usuário pode remover salas do sistema. A remoçao
-	de uma sala também remove as possíveis alocações
-	que referem a mesma, mas não exclui os respectivos
+ 	O usuï¿½rio pode remover salas do sistema. A remoï¿½ao
+	de uma sala tambï¿½m remove as possï¿½veis alocaï¿½ï¿½es
+	que referem a mesma, mas nï¿½o exclui os respectivos
 	eventos da base de dados.
  */
  public static void removerSala(){
