@@ -25,6 +25,16 @@ public abstract class ControladorEvento {
 	}
 	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes, boolean repete )
 	{
+		//debug -- apagar depois
+		System.out.println("nom: "+nome);
+		System.out.println("DIn: "+dataIni);
+		System.out.println("DFi: "+dataFim);
+		System.out.println("con: "+contato);
+		System.out.println("rep: "+repeticoes);
+		//debug -- apagar depois
+		
+		
+		
 		IBuilderEvento builderEvento = new BuilderConcretoEvento();
 		diretor.setEvento(builderEvento);
 		diretor.construirEvento(nome, dataIni, dataFim, contato, repeticoes, repete);
@@ -108,4 +118,11 @@ public abstract class ControladorEvento {
 		
 		return null;
 	}
+<<<<<<< HEAD
+	
+	public static ArrayList<Evento> getEventos(){
+		return eventos;
+	}
+======
+>>>>>>> bruno/master
 }
