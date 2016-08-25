@@ -1,7 +1,6 @@
 package br.edu.ifpb.pps.controllers;
 
 import java.util.ArrayList;
-
 import br.edu.ifpb.pps.models.Aula;
 import br.edu.ifpb.pps.models.Conferencia;
 import br.edu.ifpb.pps.models.Laboratorio;
@@ -11,9 +10,8 @@ import br.edu.ifpb.pps.models.interfaces.IBridge;
 
 public abstract class ControladorSala {
 	private static ArrayList<Sala> salas = new ArrayList<Sala>();
-	private static int idSala = 1;
 	
-	public static ArrayList<Sala> getSalas(){
+	public static ArrayList<Sala> getSalas() {
 		return salas;
 	}
 
@@ -21,16 +19,8 @@ public abstract class ControladorSala {
 		ControladorSala.salas = salas;
 	}
 
-	public int getIdSala() {
-		return idSala;
-	}
-
-	public void setIdSala(int idSala) {
-		this.idSala = idSala;
-	}
-
 	
-	public static void adicionarSala(String apelido, String tipo, int capacidade, int IDsala){
+	public static void adicionarSala(String id, String apelido, int capacidade, int IDsala){
 		IBridge sala;	
 		
 		if(IDsala == 1){
@@ -42,33 +32,26 @@ public abstract class ControladorSala {
 		}else{
 			sala = new VideoConferencia();
 		}
-		
-		salas.add(new Sala(Integer.toString(idSala), apelido, tipo, capacidade, sala));
-		idSala += 1;
+		salas.add(new Sala(id, apelido, capacidade, sala));
+		IDsala += 1;
 	}
 	
 	/**
- 	O usu�rio pode remover salas do sistema. A remo�ao
-	de uma sala tamb�m remove as poss�veis aloca��es
-	que referem a mesma, mas n�o exclui os respectivos
+ 	O usuario pode remover salas do sistema. A remocao
+	de uma sala tambem remove as possiveis alocacoes
+	que referem a mesma, mas nao exclui os respectivos
 	eventos da base de dados.
  */
- public void removerSala(String idSala){
-	 for(Sala objeto : salas){
-		 if(objeto.getId().equals(idSala)){
-			 salas.remove(objeto);
-		 }
-	 }
- }
- 
- public String listarSalas(){
-	 String result = "";
-	 
-	 for(Sala sala : salas){
-		 result += "";
-	 }
-	 
-	 return null;
- } 
- 
+	public static void removerSala(String idSala){
+		Sala sala = getSalaPeloId(idSala);
+		salas.remove(sala);
+	}
+	
+	public static Sala getSalaPeloId(String id){
+		for(Sala sala: salas)
+			if(sala.getApelido().equals(id))
+				return sala;
+		return null;
+	}
+
 }
