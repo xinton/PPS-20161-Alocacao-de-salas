@@ -5,7 +5,7 @@ import java.util.Date;
 import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
 
 /**
- * Esta classe fará com que seja instaciado apenas um diretor.
+ * Esta classe fara com que seja instaciado apenas um diretor.
  * @author Matheus Mayer
  * @since 25/07/2016
  */
@@ -14,7 +14,7 @@ public class Diretor
 	private static Diretor unicoDiretor;
 	private IBuilderEvento builderEvento;
 	/**
-	 * Este metodo será privado para que não haja mais de uma instancia.
+	 * Este metodo sera privado para que nao haja mais de uma instancia.
 	 * @author Matheus Mayer
 	 * @since 25/07/2016
 	 */

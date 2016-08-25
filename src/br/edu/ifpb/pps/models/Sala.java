@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import br.edu.ifpb.pps.models.interfaces.IBridge;
 
 public class Sala {
-	private String id, apelido, tipo;
-	private int capacidade;
+	private String id, apelido;
+	private int capacidade, tipo;
 	private IBridge sala;
 	private ArrayList<Evento> eventos;
 	
-	public Sala(String id, String apelido, String tipo, int capacidade, IBridge sala) {
+	public Sala(String id, String apelido, int capacidade, IBridge sala) {
 		this.id = id;
 		this.apelido = apelido;
-		this.tipo = tipo;
 		this.capacidade = capacidade;
 		this.sala = sala;
 	}
@@ -37,9 +36,9 @@ public class Sala {
 		this.apelido = apelido;
 	}
 	public String getTipo() {
-		return tipo;
+		return sala.getTipo();
 	}
-	public void setTipo(String tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 	public int getCapacidade() {
