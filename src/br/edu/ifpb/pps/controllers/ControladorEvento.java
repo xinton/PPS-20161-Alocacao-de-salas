@@ -17,8 +17,14 @@ public abstract class ControladorEvento {
 	private static ArrayList<Evento> eventos= new ArrayList<Evento>();
 	private static Diretor diretor = Diretor.getInstance();
 	
-	
-	
+	/**
+	 * @author Matheus Mayer
+	 * @param String nome
+	 * @param Date dataIni
+	 * @param Date dataFim
+	 * @param String contato
+	 * @param repeticoes
+	 */
 	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes){
 		IBuilderEvento builderEvento = new BuilderConcretoEvento();
 		diretor.setEvento(builderEvento);
@@ -35,15 +41,26 @@ public abstract class ControladorEvento {
 		evento.alocarSala(sala);
 		sala.registrarEvento(evento);
 				
-		ArrayList<Sala> salas = ControladorSala.getSalas();
-		ArrayList<Sala> salasDisponiveis = new ArrayList<Sala>();
 		
 		for(Sala opcao : salas){
 			if(opcao.getSala() == sala.getSala() && opcao.getEventos().isEmpty()){
 				salasDisponiveis.add(opcao);
 			}
 		}
-		//return salasDisponiveis;
+	}
+	
+	public static List<Sala> verificarSalasDisponiveis()
+	{
+		// ISSO AQUI É GAMBIS, VER UM JEITO MELHOR!! 
+		// FACHADA SERIA A MELHOR OPCAO!!
+		ArrayList<Sala> salas = ControladorSala.getSalas();
+		ArrayList<Sala> salasDisponiveis = new ArrayList<Sala>();
+
+		for (Sala sala: salas) {
+			if (sala.getEventos().isEmpty()){
+				salasDisponiveis.add(sala);
+			}
+		}
 	}
 
 	public static void setEventos(ArrayList<Evento> eventos) {
@@ -59,26 +76,26 @@ public abstract class ControladorEvento {
 	}
 	
 	/**
-	 *  O usuario pode localizar um evento escalonado atraves do nome, contato, data etc.
+	 * @author Matheus Mayer <matheusmayerduarte@gmail.com>
+	 * Falta localizar por data!!
 	 */
 	public static Evento localizarEvento(String nomeEvento, String contato, Date data) throws Exception {	
 		if (!nomeEvento.isEmpty()) {
 			return localizarEventoPorNome(nomeEvento);
-		}else if (!contato.isEmpty()) {
+		} else if (!contato.isEmpty()) {
 			return localizarEventoPeloContato(contato);
-		}else throw new Exception("Nao foi possivel localizar o evento pretendido");
-		//return diretor.getEvento();
+		} else throw new Exception("Nao foi possivel localizar o evento pretendido");
 	}
 	
 	/**
-	 * O usuario pode desalocar um evento previamente alocado.
+	 * @author Diego Carvalho
 	 */
 	public static void desalocarEvento(Evento evento) throws Exception{
-		if(evento!=null)
+		if (evento != null) {
 			evento.desalocarSalas();
-		else
+		} else {
 			throw new Exception("Evento nao encontrado!");
-			
+			}
 	}
 
 	/**
@@ -90,6 +107,7 @@ public abstract class ControladorEvento {
 	 */
 	public static void cancelarEvento(String nomeEvento) throws Exception{
 		Evento evento = localizarEventoPorNome(nomeEvento);
+		
 		if (evento == null) {
 			throw new Exception ("Evento não existente");
 		}

@@ -58,12 +58,7 @@ public class Evento {
 		else
 			repete = false;
 	}
-
-	//#######################################################################################################
-	//                                        GETs/SETs
-	//#######################################################################################################
-
-	//                          **************** GETs *********************
+	
 	public String getNome()     { return nome; }
 	
 	public String getContato()  { return contato; }
@@ -78,7 +73,6 @@ public class Evento {
 	
 	public int getNumeroDeSalas(){ return salas.size(); }
 	
-	//                          **************** SETs *********************
 	public void setNome(String nome)           { this.nome = nome; }
 
 	public void setContato(String contato)     { this.contato = contato; }
