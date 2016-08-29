@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import br.edu.ifpb.pps.facade.EventoFacade;
 import br.edu.ifpb.pps.models.BuilderConcretoEvento;
 import br.edu.ifpb.pps.models.Diretor;
 import br.edu.ifpb.pps.models.Evento;
@@ -16,14 +17,17 @@ public abstract class ControladorEvento {
 
 	private static ArrayList<Evento> eventos= new ArrayList<Evento>();
 	private static Diretor diretor = Diretor.getInstance();
-	
-	
-	
+	private static EventoFacade eventoFacade = new EventoFacade();
+	/**
+	 * @author Matheus Mayer
+	 * @param String nome
+	 * @param Date dataIni
+	 * @param Date dataFim
+	 * @param String contato
+	 * @param repeticoes
+	 */
 	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes){
-		IBuilderEvento builderEvento = new BuilderConcretoEvento();
-		diretor.setEvento(builderEvento);
-		diretor.construirEvento(nome, dataIni, dataFim, contato, repeticoes);
-		adicionarEventosNaLista(diretor.getEvento());
+		eventoFacade.adicionarEventos(nome, dataIni, dataFim, contato, repeticoes);
 	}
 
 	/**
@@ -35,50 +39,36 @@ public abstract class ControladorEvento {
 		evento.alocarSala(sala);
 		sala.registrarEvento(evento);
 				
-		ArrayList<Sala> salas = ControladorSala.getSalas();
-		ArrayList<Sala> salasDisponiveis = new ArrayList<Sala>();
-		
 		for(Sala opcao : salas){
 			if(opcao.getSala() == sala.getSala() && opcao.getEventos().isEmpty()){
 				salasDisponiveis.add(opcao);
 			}
 		}
-		//return salasDisponiveis;
 	}
+	
+	public static List<Sala> verificarSalasDisponiveis()
+	{
+		// ISSO AQUI É GAMBIS, VER UM JEITO MELHOR!! 
+		// FACHADA SERIA A MELHOR OPCAO!!
+		ArrayList<Sala> salas = ControladorSala.getSalas();
+		ArrayList<Sala> salasDisponiveis = new ArrayList<Sala>();
 
-	public static void setEventos(ArrayList<Evento> eventos) {
-		ControladorEvento.eventos = eventos;
-	}
-	
-	public static Diretor getDiretor() {
-		return diretor;
-	}
-	
-	public static void setDiretor(Diretor diretor) {
-		ControladorEvento.diretor = diretor;
+		for (Sala sala: salas) {
+			if (sala.getEventos().isEmpty()){
+				salasDisponiveis.add(sala);
+			}
+		}
 	}
 	
 	/**
-	 *  O usuario pode localizar um evento escalonado atraves do nome, contato, data etc.
-	 */
-	public static Evento localizarEvento(String nomeEvento, String contato, Date data) throws Exception {	
-		if (!nomeEvento.isEmpty()) {
-			return localizarEventoPorNome(nomeEvento);
-		}else if (!contato.isEmpty()) {
-			return localizarEventoPeloContato(contato);
-		}else throw new Exception("Nao foi possivel localizar o evento pretendido");
-		//return diretor.getEvento();
-	}
-	
-	/**
-	 * O usuario pode desalocar um evento previamente alocado.
+	 * @author Diego Carvalho
 	 */
 	public static void desalocarEvento(Evento evento) throws Exception{
-		if(evento!=null)
+		if (evento != null) {
 			evento.desalocarSalas();
-		else
+		} else {
 			throw new Exception("Evento nao encontrado!");
-			
+			}
 	}
 
 	/**
@@ -90,6 +80,7 @@ public abstract class ControladorEvento {
 	 */
 	public static void cancelarEvento(String nomeEvento) throws Exception{
 		Evento evento = localizarEventoPorNome(nomeEvento);
+		
 		if (evento == null) {
 			throw new Exception ("Evento não existente");
 		}
@@ -97,42 +88,6 @@ public abstract class ControladorEvento {
 		removerEvento(evento);
 	}
 	
-	/**
-	 * Este metodo adicionaa cada evento na lista de eventos.
-	 * @author Matheus Mayer
-	 * @since 26/07/2016
-	 * @param Evento evento
-	 */
-	private static void adicionarEventosNaLista(Evento evento){
-		eventos.add(evento);
-	}
-	
-	/**
-	 * Este metodo localizara um evento pelo nome
-	 * @author Matheus Mayer
-	 * @param String nomeEvento
-	 * @return Evento evento || null
-	 */
-	public static Evento localizarEventoPorNome(String nomeEvento){
-		for (Evento evento: eventos)
-			if (evento.getNome().contains(nomeEvento))
-				return evento;
-		return null;
-	}
-	
-	/**
-	 * Este metodo localizara o evento pelo contato do mesmo.
-	 * @author Matheus Mayer
-	 * @param String nomeContato
-	 * @return Evento evento || null
-	 */
-	public static Evento localizarEventoPeloContato(String nomeContato){
-		for (Evento evento: eventos) 
-			if (evento.getContato().contains(nomeContato)) 
-				return evento;	
-		return null;
-	}
-
 	public static ArrayList<Evento> getEventos(){
 		return eventos;
 		}	
