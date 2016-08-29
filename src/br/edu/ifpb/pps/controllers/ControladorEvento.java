@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import br.edu.ifpb.pps.facade.EventoFacade;
 import br.edu.ifpb.pps.models.BuilderConcretoEvento;
 import br.edu.ifpb.pps.models.Diretor;
 import br.edu.ifpb.pps.models.Evento;
@@ -16,7 +17,7 @@ public abstract class ControladorEvento {
 
 	private static ArrayList<Evento> eventos= new ArrayList<Evento>();
 	private static Diretor diretor = Diretor.getInstance();
-	
+	private static EventoFacade eventoFacade = new EventoFacade();
 	/**
 	 * @author Matheus Mayer
 	 * @param String nome
@@ -26,10 +27,7 @@ public abstract class ControladorEvento {
 	 * @param repeticoes
 	 */
 	public static void adicionarEvento(String nome, Date dataIni, Date dataFim, String contato, int repeticoes){
-		IBuilderEvento builderEvento = new BuilderConcretoEvento();
-		diretor.setEvento(builderEvento);
-		diretor.construirEvento(nome, dataIni, dataFim, contato, repeticoes);
-		adicionarEventosNaLista(diretor.getEvento());
+		eventoFacade.adicionarEventos(nome, dataIni, dataFim, contato, repeticoes);
 	}
 
 	/**
@@ -41,7 +39,6 @@ public abstract class ControladorEvento {
 		evento.alocarSala(sala);
 		sala.registrarEvento(evento);
 				
-		
 		for(Sala opcao : salas){
 			if(opcao.getSala() == sala.getSala() && opcao.getEventos().isEmpty()){
 				salasDisponiveis.add(opcao);
@@ -61,30 +58,6 @@ public abstract class ControladorEvento {
 				salasDisponiveis.add(sala);
 			}
 		}
-	}
-
-	public static void setEventos(ArrayList<Evento> eventos) {
-		ControladorEvento.eventos = eventos;
-	}
-	
-	public static Diretor getDiretor() {
-		return diretor;
-	}
-	
-	public static void setDiretor(Diretor diretor) {
-		ControladorEvento.diretor = diretor;
-	}
-	
-	/**
-	 * @author Matheus Mayer <matheusmayerduarte@gmail.com>
-	 * Falta localizar por data!!
-	 */
-	public static Evento localizarEvento(String nomeEvento, String contato, Date data) throws Exception {	
-		if (!nomeEvento.isEmpty()) {
-			return localizarEventoPorNome(nomeEvento);
-		} else if (!contato.isEmpty()) {
-			return localizarEventoPeloContato(contato);
-		} else throw new Exception("Nao foi possivel localizar o evento pretendido");
 	}
 	
 	/**
@@ -115,42 +88,6 @@ public abstract class ControladorEvento {
 		removerEvento(evento);
 	}
 	
-	/**
-	 * Este metodo adicionaa cada evento na lista de eventos.
-	 * @author Matheus Mayer
-	 * @since 26/07/2016
-	 * @param Evento evento
-	 */
-	private static void adicionarEventosNaLista(Evento evento){
-		eventos.add(evento);
-	}
-	
-	/**
-	 * Este metodo localizara um evento pelo nome
-	 * @author Matheus Mayer
-	 * @param String nomeEvento
-	 * @return Evento evento || null
-	 */
-	public static Evento localizarEventoPorNome(String nomeEvento){
-		for (Evento evento: eventos)
-			if (evento.getNome().contains(nomeEvento))
-				return evento;
-		return null;
-	}
-	
-	/**
-	 * Este metodo localizara o evento pelo contato do mesmo.
-	 * @author Matheus Mayer
-	 * @param String nomeContato
-	 * @return Evento evento || null
-	 */
-	public static Evento localizarEventoPeloContato(String nomeContato){
-		for (Evento evento: eventos) 
-			if (evento.getContato().contains(nomeContato)) 
-				return evento;	
-		return null;
-	}
-
 	public static ArrayList<Evento> getEventos(){
 		return eventos;
 		}	
