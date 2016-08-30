@@ -6,7 +6,8 @@ import br.edu.ifpb.pps.models.Conferencia;
 import br.edu.ifpb.pps.models.Laboratorio;
 import br.edu.ifpb.pps.models.Sala;
 import br.edu.ifpb.pps.models.VideoConferencia;
-import br.edu.ifpb.pps.models.interfaces.IBridge;
+
+import br.edu.ifpb.pps.models.interfaces.TipoSala;
 
 public abstract class ControladorSala {
 	
@@ -23,6 +24,7 @@ public abstract class ControladorSala {
 	
 	public static void adicionarSala(String id, String apelido, int capacidade, int IDsala){
 		IBridge sala;	
+		TipoSala sala;	
 		
 		if (IDsala == 1) {
 			sala = new Aula();

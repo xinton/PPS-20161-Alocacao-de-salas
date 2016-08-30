@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import br.edu.ifpb.pps.facade.EventoFacade;
 import br.edu.ifpb.pps.models.BuilderConcretoEvento;

@@ -239,6 +239,7 @@ public class AplicacaoConsole {
 		count = 1;
 		for(Sala sala: salas){
 			System.out.println("Id: "+count+" | Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade()+" | Tipo: "+sala.getTipo());
+			System.out.println("Id: "+count+" | Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade()+" | Tipo: "+sala.getTipo().getClass().getName());
 			count++;
 		}
 		System.out.println("Escolha a Sala para alocar um Evento: ");
