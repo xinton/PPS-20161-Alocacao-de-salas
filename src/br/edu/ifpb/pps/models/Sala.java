@@ -2,27 +2,27 @@ package br.edu.ifpb.pps.models;
 
 import java.util.ArrayList;
 
-import br.edu.ifpb.pps.models.interfaces.IBridge;
 
-public class Sala {
-	private String id, apelido, tipo;
+import br.edu.ifpb.pps.models.interfaces.Pavimento;
+import br.edu.ifpb.pps.models.interfaces.TipoSala;
+
+public class Sala extends Pavimento{
+	private String id, apelido;
 	private int capacidade;
-	private IBridge sala;
+	private TipoSala tipo;
 	private ArrayList<Evento> eventos;
 	
-	public Sala(String id, String apelido, String tipo, int capacidade, IBridge sala) {
-		this.id = id;
+	public Sala(String id, String apelido, int capacidade, TipoSala tipo) {
+		super(id);
 		this.apelido = apelido;
-		this.tipo = tipo;
 		this.capacidade = capacidade;
-		this.sala = sala;
+		this.tipo=this.tipo;
+		
 	}
 	/**
 	 * @author Pedro Paiva
 	 */
-	public void salaFuncao(){
-		sala.funcao(tipo, apelido);
-	}
+	
 	
 	public String getId() {
 		return id;
@@ -36,12 +36,8 @@ public class Sala {
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+	
+	
 	public int getCapacidade() {
 		return capacidade;
 	}
@@ -54,16 +50,17 @@ public class Sala {
 			eventos = new ArrayList<Evento>();
 		eventos.add(evento);
 	}
-	public IBridge getSala() {
-		return sala;
-	}
-	public void setSala(IBridge sala) {
-		this.sala = sala;
-	}
+
 	public ArrayList<Evento> getEventos() {
 		return eventos;
 	}
 	public void setEventos(ArrayList<Evento> eventos) {
 		this.eventos = eventos;
+	}
+	public TipoSala getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoSala tipo) {
+		this.tipo = tipo;
 	}
 }

@@ -9,7 +9,7 @@ public class Evento {
 	private Date dataInicio, dataFim;
 	private int repeticao;
 	private boolean repete;
-	private ArrayList<Sala> salas;
+	private ArrayList<Sala> salas = new ArrayList<Sala>();
 	
 	public Evento(){}
 	
@@ -42,6 +42,10 @@ public class Evento {
 		salas.add(sala);
 	}
 	
+	public void desalocarSalas(){
+		salas.clear();
+	}
+	
 	/**
 	 * Metodo que checa se o evento tem alguma repeticao e altera a variavel repete (do tipo Boolean) para o estado atual.
 	 * 
@@ -54,12 +58,7 @@ public class Evento {
 		else
 			repete = false;
 	}
-
-	// *******************************************************
-	//                        GETs e SETs
-	// *******************************************************
-
-	// **************** GETs *********************
+	
 	public String getNome()     { return nome; }
 	
 	public String getContato()  { return contato; }
@@ -74,7 +73,6 @@ public class Evento {
 	
 	public int getNumeroDeSalas(){ return salas.size(); }
 	
-	// **************** SETs *********************
 	public void setNome(String nome)           { this.nome = nome; }
 
 	public void setContato(String contato)     { this.contato = contato; }

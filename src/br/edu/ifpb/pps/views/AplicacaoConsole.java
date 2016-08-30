@@ -1,6 +1,5 @@
 package br.edu.ifpb.pps.views;
 
-import java.awt.Event;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,17 +15,40 @@ public class AplicacaoConsole {
 
 	private static Scanner scanner = new Scanner(System.in);
 	
-	
+	//#######################################################################################################
+	//                                        MAIN/INICIALIZACAO
+	//#######################################################################################################
 	public static void main(String[] args) throws ParseException {
 		AplicacaoConsole app = new AplicacaoConsole();
-		app.startVariables();
+		//app.inicializacaoDeDebug();
 		app.printaMenu();
 	}
 	
-	private void startVariables(){
+	/**
+	 * Metodo que popula a aplicacao para testes.
+	 * 
+	 * @author Diego Carvalho
+	 * @since 26/07/2016
+	 */
+	@SuppressWarnings("unused")
+	private void inicializacaoDeDebug(){
+		ControladorSala.adicionarSala("sl01","apelido01", 1, 1);
+		ControladorSala.adicionarSala("sl02", "apelido02", 2, 2);
 		
+		ControladorEvento.adicionarEvento("Evento 01 - Nome", new Date(), new Date(), "Evento 01 Contato", 1);
+		ControladorEvento.adicionarEvento("Evento 02 - Nome", new Date(), new Date(), "Evento 02 Contato", 2);
 	}
 
+	//#######################################################################################################
+	//                                              MENUS
+	//#######################################################################################################
+	/**
+	 * Metodo que printa o menu principal da aplicacao e chama o metodo de selecao de itens deste menu.
+	 * 
+	 * @author Diego Carvalho
+	 * @since 25/07/2016
+	 * @throws ParseException
+	 */
 	private void printaMenu() throws ParseException{
 		System.out.println("");
 		System.out.println("###############################################################################");
@@ -47,18 +69,25 @@ public class AplicacaoConsole {
 		selecionaItemDoMenu();
 	}
 	
+	/**
+	 * Metodo que printa o sub menu de localizacao de eventos.
+	 * 
+	 * @author Washington Bruno
+	 * @since 26/07/2016
+	 * @throws ParseException
+	 */
 	private void printaSubMenuLocalizar() throws ParseException{
 		System.out.println("");		
 		System.out.println("########################################");
 		System.out.println("#            Localizar por:            #");
 		System.out.println("#--------------------------------------#");
-		System.out.println("#      1. Nome			               #");
+		System.out.println("#      1. Nome                         #");
 		System.out.println("#                                      #");
-		System.out.println("#      2. Contado            		   #");
+		System.out.println("#      2. Contado            	       #");
 		System.out.println("#                                      #");
-		System.out.println("#      3. Data Inicial       	       #");
+		System.out.println("#      3. Data Inicial                 #");
 		System.out.println("#                                      #");
-		System.out.println("#      4. Data Final			       #");
+		System.out.println("#      4. Data Final                   #");
 		System.out.println("#                                      #");
 		System.out.println("#      0. Voltar                       #");
 		System.out.println("#                                      #");
@@ -66,8 +95,15 @@ public class AplicacaoConsole {
 		System.out.println("");
 	}
 	
+	/**
+	 * Metodo que chama uma funcao da aplicacao(metodo desta classe), de acordo com o input do usuario.
+	 * 
+	 * @author Diego Carvalho
+	 * @since 25/07/2016
+	 * @throws ParseException
+	 */
 	private void selecionaItemDoMenu() throws ParseException{
-		System.out.print("Digite uma Opção: ");
+		System.out.print("Digite uma Opcao: ");
 		int selecao = scanner.nextInt();
 		scanner.nextLine();
 		switch (selecao) {
@@ -78,12 +114,22 @@ public class AplicacaoConsole {
 			case 5: { desalocarEvento(); break; }
 			case 6: { cancelarEvento();  break; }
 			case 7: { removerSala();     break; }
-			case 8: { System.out.println("Fechando a Aplicação!"); System.exit(0); }
-			default:{ System.out.println("Seleção inválida, tente novamente!"); selecionaItemDoMenu(); break; }
+			case 8: { System.out.println("Fechando a AplicaÃ§Ã£o!"); System.exit(0); }
+			default:{ System.out.println("SeleÃ§Ã£o invÃ¡lida, tente novamente!"); selecionaItemDoMenu(); break; }
 		}
 		printaMenu();
 	}
 	
+	//#######################################################################################################
+    //                                        METODOS FUNCIONAIS
+	//#######################################################################################################
+	
+	/**
+	 * Metodo que adiciona salas no sistema. Este metodo passa input do usuario para o controlador de salas.
+	 * 
+	 *  @author Diego Carvalho
+	 *  @since 25/07/2016
+	 */
 	private void adicionarSala(){
 		System.out.println("----------------------------- Adicionar Sala ----------------------------------");
 		System.out.print  ("Identificador da sala: ");
@@ -92,12 +138,20 @@ public class AplicacaoConsole {
 		String salaApelido = scanner.nextLine();
 		System.out.print  ("Capacidade da sala: ");
 		int salaCapacidade = scanner.nextInt();
-		System.out.println  ("Tipos de sala: 1.AULA | 2.LABORATÓRIO | 3.CONFERÊNCIA | 4.VIDEOCONFÊRENCIA");
+		System.out.println  ("Tipos de sala: 1.AULA | 2.LABORATÃ“RIO | 3.CONFERÃŠNCIA | 4.VIDEOCONFÃŠRENCIA");
 		int tipoSala = tipoDeSala();
 		
 		ControladorSala.adicionarSala(salaId, salaApelido, salaCapacidade, tipoSala);
+		System.out.println("Sala "+salaId+" adicionada com sucesso!");
 	}
 	
+	/**
+	 * Metodo que impede a entrada no sistema de tipos de salas inexistentes.
+	 * 
+	 * @author Diego Carvalho
+	 * @since 26/07/2016
+	 * @return int: tipo
+	 */
 	private int tipoDeSala(){
 		int tipo = 0;
 		do{
@@ -108,6 +162,12 @@ public class AplicacaoConsole {
 		return tipo;
 	}
 	
+	/**
+	 * Metodo que adiciona eventos no sistema. Este metodo passa input do usuario para o controlador de eventos.
+	 * 
+	 *  @author Diego Carvalho
+	 *  @since 25/07/2016
+	 */
 	private void adicionaEvento(){
 		System.out.println("---------------------------- Adicionar Evento ---------------------------------");
 		System.out.print  ("Nome do evento: ");
@@ -124,107 +184,181 @@ public class AplicacaoConsole {
 			dataFim = new Date();
 		System.out.print  ("Nome do contato para o evento: ");
 		String contato = scanner.nextLine();
-		System.out.print  ("Repetições semanias do evento: ");
+		System.out.print  ("RepetiÃ§Ãµes semanias do evento: ");
 		int repeticoes = scanner.nextInt();
 		scanner.nextLine();
 		
-		ControladorEvento.adicionarEvento(nomeEvento, dataInicio, dataFim, contato, repeticoes, false);
+		ControladorEvento.adicionarEvento(nomeEvento, dataInicio, dataFim, contato, repeticoes);
 	}
 	
+	/**
+	 * Metodo que aloca um evento em uma sala. Este metodo passa parmetros q sao tratados no controlador de eventos.
+	 * 
+	 *  @author Diego Carvalho
+	 *  @since 26/07/2016
+	 */
 	private void alocarEvento(){
-		ArrayList<Evento> eventos = ControladorEvento.getEventos();
+		ArrayList<Evento> eventos = new ArrayList<Evento>();
+		ArrayList<Evento> eventosAux = ControladorEvento.getEventos();
 		ArrayList<Sala> salas = ControladorSala.getSalas();
+		Evento eventoAloc = null;
+		
+		//Checagem de itens na lista---------------------------------------------------------------------
+		if(eventosAux.size()==0){
+			System.out.println("NÃ£o hÃ¡ eventos para serem alocados!");
+			return;
+		}
+		else if(salas.size()==0){
+			System.out.println("Nao ha salas para alocar eventos!");
+			return;
+		}
 		System.out.println("------------------------------ Alocar Evento ----------------------------------");
+		
+		//Listando Eventos----------------------------------------------------------------------------------
 		System.out.println("Lista de Eventos sem sala...");
 		int count = 1;
-		for(Evento evento: eventos){
-			if(evento.getNumeroDeSalas()==0)
+		for(Evento evento: eventosAux){
+			if(evento.getNumeroDeSalas()!=0)
 				continue;
-			System.out.println("Id: "+count+" | Nome: "+evento.getNome()+" | Data Inicio: "+evento.getDataInicio()+" |");
+			eventos.add(evento);
+			System.out.println("Id: "+count+" | Nome: "+evento.getNome()+" | Data Inicio: "+evento.getDataInicio()+" | Repeticoes: "+evento.getRepeticao());
 			count++;
 		}
+		if(eventos.size()==0){
+			System.out.println("NÃ£o hÃ¡ eventos para serem alocados!");
+			return;
+		}
 		System.out.println("Escolha o Evento para alocar uma sala: ");
-		int idEvento = scanner.nextInt();
+		int idEvento = scanner.nextInt()-1;
 		scanner.nextLine();
-		System.out.println("Evento "+eventos.get(idEvento).getNome()+" escolhido para alocar uma Sala.");
+		eventoAloc = eventos.get(idEvento);
+		System.out.println("Evento "+eventoAloc.getNome()+" escolhido para alocar uma Sala.");
+		
+		//Listando Salas----------------------------------------------------------------------------------
 		System.out.println("Lista de Salas para alocar...");
 		count = 1;
+		for(Sala sala: salas){
+			System.out.println("Id: "+count+" | Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade()+" | Tipo: "+sala.getTipo().getClass().getName());
+			count++;
+		}
+		System.out.println("Escolha a Sala para alocar um Evento: ");
+		int idSala = scanner.nextInt()-1;
+		scanner.nextLine();
+		
+		//Alocando Evento em Sala------------------------------------------------------------------------
+		ControladorEvento.alocarEvento(salas.get(idSala), eventoAloc);
+		System.out.println("Evento "+eventoAloc.getNome()+" alocado na sala "+salas.get(idSala).getApelido());
 	}
 	
+	/**
+	 * Metodo de localizacao de eventos por diversos parametros. Repassa a busca para o controlador de eventos.
+	 * 
+	 * @author Washington Bruno
+	 * @since 26/07/2016
+	 * @throws ParseException
+	 */
 	private void localizarEvento() throws ParseException{
 		System.out.println("---------------------------- Localizar Evento ---------------------------------");
 		printaSubMenuLocalizar();
 
-		System.out.print("Digite uma Opção de busca: ");
+		System.out.print("Digite uma OpÃ§Ã£o de busca: ");
 		int opLocalizar = scanner.nextInt();
 		scanner.nextLine();
-		Evento evento;
+		Evento evento = null;
 		switch (opLocalizar) {
         case 1:
             System.out.println("Digite o nome");
             String nome = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoPorNome(nome);
-            if ( evento != null ) {
-            	System.out.println(evento);
-            } else {
-            	System.out.println("Evento não encontrado.");
-            }            
+            evento = ControladorEvento.localizarEventoPorNome(nome);           
             break;
         case 2:
             System.out.println("Digite o contato");
             String contato = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoPeloContato(contato);
-            if ( evento != null ) {
-            	System.out.println(evento);
-            } else {
-            	System.out.println("Evento não encontrado.");
-            }           
+            evento = ControladorEvento.localizarEventoPeloContato(contato);          
             break;
         case 3:
             System.out.println("Digite a data inicial");
             String dataIni = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoDataInicial(dataIni);
-            if ( evento != null ) {
-            	System.out.println(evento);
-            } else {
-            	System.out.println("Evento não encontrado.");
-            }            
+            evento = ControladorEvento.localizarEventoDataInicial(dataIni);           
             break;
         case 4:
             System.out.println("Digite a data final");
             String dataFim = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoDataFim(dataFim);
-            if ( evento != null ) {
-            	System.out.println(evento);
-            } else {
-            	System.out.println("Evento não encontrado.");
-            }            
+            evento = ControladorEvento.localizarEventoDataFim(dataFim);            
             break;
         case 0:   
         	printaMenu();
             break;
         default:
-             System.out.println("Este não é uma opção válida!");
+             System.out.println("Este nÃ£o Ã© uma opÃ§Ã£o vÃ¡lida!");
      }
-
+		if(evento==null){
+			System.out.println("Evento nao encontrado!");
+			return;
+		}
+		System.out.println("Evento Encontrado!");
+		System.out.println("Evento: "+evento.getNome()+" | Contato: "+evento.getContato()+" | Data Inicio: "+evento.getDataInicio()+" | Repeticoes: "+evento.getRepeticao());
 	}
 	
+	/**
+	 * Metodo que desaloca um evento de uma sala. Este metodo passa parmetros q sao tratados no controlador de eventos.
+	 * 
+	 *  @author Diego Carvalho
+	 *  @since 26/07/2016
+	 */
 	private void desalocarEvento(){
+		ArrayList<Evento> eventos = ControladorEvento.getEventos();
 		System.out.println("---------------------------- Desalocar Evento ---------------------------------");
-		
+		System.out.println("Digite o nome do evento para desalocar");
+		String eventoNome = scanner.nextLine();
+		Evento evento = null;
+		for(Evento ev: eventos)
+			if(ev.getNome().equals(eventoNome))
+				evento = ev;
+		try {
+			ControladorEvento.desalocarEvento(evento);
+			System.out.println("Evento "+evento.getNome()+" desalocado com sucesso!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());;
+		}
 	}
 	
+	/**
+	 * Metodo que cancela um evento, removendo o mesmo da aplicacao. Este metodo passa parmetros q sao tratados no controlador de eventos.
+	 * 
+	 *  @author Diego Carvalho
+	 *  @since 26/07/2016
+	 */
 	private void cancelarEvento(){
 		System.out.println("---------------------------- Cancelar Evento ----------------------------------");
-		
+		System.out.println("Digite o nome do evento para cancelar");
+		String evento = scanner.nextLine();
+		try {
+			ControladorEvento.cancelarEvento(evento);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Evento "+evento+" cancelado com sucesso!");	
 	}
 	
+	/**
+	 * Metodo que remove salas no sistema. Este metodo passa input do usuario para o controlador de salas.
+	 * 
+	 *  @author Diego Carvalho
+	 *  @since 25/07/2016
+	 */
 	private void removerSala(){
 		System.out.println("------------------------------ Remover Sala -----------------------------------");
-		
+		System.out.println("Digite o nome de uma sala para remover");
+		String sala = scanner.nextLine();
+		try {
+			ControladorSala.removerSala(sala);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Sala "+sala+" removida com sucesso!");
 	}
 }
-
 
 
 

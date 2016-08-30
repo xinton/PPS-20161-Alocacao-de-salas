@@ -9,48 +9,41 @@ public class BuilderConcretoEvento implements IBuilderEvento
 	private Evento evento;
 	
 	@Override
-	public Evento getEvento() 
-	{
+	public Evento getEvento() {
 		return this.evento;
 	}
 
 	@Override
-	public void criarNovoEvento() 
-	{
+	public void criarNovoEvento() {
 		this.evento = new Evento();
 	}
 
 	@Override
-	public void definirNome(String nome)
-	{
+	public void definirNome(String nome){
 		this.evento.setNome(nome);
 	}
 
 	@Override
-	public void definirDataInicio(Date dataIni) 
-	{
+	public void definirDataInicio(Date dataIni) {
 		this.evento.setDataInicio(dataIni);
 	}
 
 	@Override
-	public void definirDataFim(Date dataFim) 
-	{
+	public void definirDataFim(Date dataFim) {
 		this.evento.setDataFim(dataFim);		
 	}
 
 	@Override
-	public void definirContato(String contato)
-	{
+	public void definirContato(String contato){
 		this.evento.setContato(contato);	
 	}
 
 	@Override
-	public void definirRepeticoes(int repeticoes) 
-	{
+	public void definirRepeticoes(int repeticoes) {
 		try {
 			this.evento.setRepeticao(repeticoes);
 		} catch (Exception e) {
-			// AJEITAR ISSO AQUI DEPOIS HEIIIN!!! e.printStackTrace(); 
+			e.printStackTrace(); 
 		}	
 	}
 }
