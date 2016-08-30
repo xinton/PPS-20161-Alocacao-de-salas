@@ -6,9 +6,11 @@ import br.edu.ifpb.pps.models.Conferencia;
 import br.edu.ifpb.pps.models.Laboratorio;
 import br.edu.ifpb.pps.models.Sala;
 import br.edu.ifpb.pps.models.VideoConferencia;
-import br.edu.ifpb.pps.models.interfaces.IBridge;
+
+import br.edu.ifpb.pps.models.interfaces.TipoSala;
 
 public abstract class ControladorSala {
+	
 	private static ArrayList<Sala> salas = new ArrayList<Sala>();
 	
 	public static ArrayList<Sala> getSalas() {
@@ -22,14 +24,15 @@ public abstract class ControladorSala {
 	
 	public static void adicionarSala(String id, String apelido, int capacidade, int IDsala){
 		IBridge sala;	
+		TipoSala sala;	
 		
-		if(IDsala == 1){
+		if (IDsala == 1) {
 			sala = new Aula();
-		}else if(IDsala == 2){
+		} else if(IDsala == 2) {
 			sala = new Laboratorio();
-		}else if(IDsala == 3){
+		} else if(IDsala == 3) {
 			sala = new Conferencia(); 
-		}else{
+		} else {
 			sala = new VideoConferencia();
 		}
 		salas.add(new Sala(id, apelido, capacidade, sala));
