@@ -37,8 +37,6 @@ public class ViewAlocarEvento extends JFrame {
 	private JComboBox cbxSalas;
 	private JComboBox cbxEventos;
 	
-
-
 	/**
 	 * Create the frame.
 	 */
@@ -129,10 +127,12 @@ public class ViewAlocarEvento extends JFrame {
 		for(Sala s:salas)
 			cbxSalas.addItem(s.getId());
 		for(Evento e:eventosAux){
-			if(e.getNumeroDeSalas()==0){
+			
+			if (e.getSala() == null) {
 				eventos.add(e);
 				cbxEventos.addItem(e.getNome());
 			}
+			
 		}
 	}
 

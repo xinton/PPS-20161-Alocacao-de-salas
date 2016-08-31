@@ -1,11 +1,10 @@
 package br.edu.ifpb.pps.models;
 
-import java.util.ArrayList;
 import br.edu.ifpb.pps.models.interfaces.Pavimento;
 import br.edu.ifpb.pps.models.interfaces.TipoSala;
 
 public class Sala extends Pavimento{
-	private String id, apelido;
+	private String apelido;
 	private int capacidade;
 	private TipoSala tipo;
 	private Evento evento;
@@ -14,43 +13,28 @@ public class Sala extends Pavimento{
 		super(id);
 		this.apelido = apelido;
 		this.capacidade = capacidade;
-		this.tipo=this.tipo;	
+		this.tipo = tipo;	
 	}
 	
 	/**
 	 * @author Pedro Paiva
 	 */
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	
 	public String getApelido() {
-		return apelido;
+		return this.apelido;
 	}
 	
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
 	
-	public String getTipo() {
-		return sala.getTipo();
-	}
-	
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
-	}
-	
 	public int getCapacidade() {
-		return capacidade;
+		return this.capacidade;
 	}
 	
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
 	}
-	
 	
 	public Evento getEvento() {
 		return evento;
@@ -60,8 +44,8 @@ public class Sala extends Pavimento{
 		this.evento = evento;
 	}
 
-	public TipoSala getTipo() {
-		return tipo;
+	public String getTipo() {
+		return tipo.getTipo();
 	}
 	
 	public void setTipo(TipoSala tipo) {

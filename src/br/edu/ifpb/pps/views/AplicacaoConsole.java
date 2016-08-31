@@ -20,7 +20,7 @@ public class AplicacaoConsole {
 	//#######################################################################################################
 	public static void main(String[] args) throws ParseException {
 		AplicacaoConsole app = new AplicacaoConsole();
-		//app.inicializacaoDeDebug();
+		app.inicializacaoDeDebug();
 		app.printaMenu();
 	}
 	
@@ -30,13 +30,18 @@ public class AplicacaoConsole {
 	 * @author Diego Carvalho
 	 * @since 26/07/2016
 	 */
+	//VAI SER NECESSARIA PARA APRESENTACAO
 	@SuppressWarnings("unused")
 	private void inicializacaoDeDebug(){
-		ControladorSala.adicionarSala("sl01","apelido01", 1, 1);
-		ControladorSala.adicionarSala("sl02", "apelido02", 2, 2);
+		ControladorSala.adicionarSala("Sala 01","sl01", 1, 1);
+		ControladorSala.adicionarSala("Laboratorio 01", "lb01", 2, 2);
+		ControladorSala.adicionarSala("Laboratorio 02", "lb02", 3, 2);
 		
-		ControladorEvento.adicionarEvento("Evento 01 - Nome", new Date(), new Date(), "Evento 01 Contato", 1);
-		ControladorEvento.adicionarEvento("Evento 02 - Nome", new Date(), new Date(), "Evento 02 Contato", 2);
+		ControladorEvento.adicionarEvento("Evento 01 - A arte do Deboismo", new Date(), new Date(), "Pedro Paiva", 1);
+		ControladorEvento.adicionarEvento("Evento 02 - Mito do POG", new Date(), new Date(), "Matheus Mayer", 2);
+		ControladorEvento.adicionarEvento("Evento 03 - Mestre do Firebase", new Date(), new Date(), "Joao Paulo", 3);
+		ControladorEvento.adicionarEvento("Evento 04 - Nao vai da nao", new Date(), new Date(), "Diego Carvalho", 4);
+		ControladorEvento.adicionarEvento("Evento 05 - M. Varandas Business", new Date(), new Date(), "Washington Bruno", 5);
 	}
 
 	//#######################################################################################################
@@ -104,18 +109,26 @@ public class AplicacaoConsole {
 	 */
 	private void selecionaItemDoMenu() throws ParseException{
 		System.out.print("Digite uma Opcao: ");
-		int selecao = scanner.nextInt();
-		scanner.nextLine();
-		switch (selecao) {
-			case 1: { adicionarSala();   break; }
-			case 2: { adicionaEvento();  break; }
-			case 3: { alocarEvento();    break; }
-			case 4: { localizarEvento(); break; }
-			case 5: { desalocarEvento(); break; }
-			case 6: { cancelarEvento();  break; }
-			case 7: { removerSala();     break; }
-			case 8: { System.out.println("Fechando a Aplicação!"); System.exit(0); }
-			default:{ System.out.println("Seleção inválida, tente novamente!"); selecionaItemDoMenu(); break; }
+		//int selecao = scanner.nextInt();
+		//scanner.nextLine();
+		String selecao = scanner.nextLine();
+		
+		try {
+			int numeroEscolhido = Integer.parseInt(selecao);
+			
+			switch (numeroEscolhido) {
+				case 1: { adicionarSala();   break; }
+				case 2: { adicionaEvento();  break; }
+				case 3: { alocarEvento();    break; }
+				case 4: { localizarEvento(); break; }
+				case 5: { desalocarEvento(); break; }
+				case 6: { cancelarEvento();  break; }
+				case 7: { removerSala();     break; }
+				case 8: { System.out.println("Fechando a Aplicacao!"); System.exit(0); }
+				default:{ System.out.println("Selecao invalida, tente novamente!"); selecionaItemDoMenu(); break;}
+			}
+		}catch(NumberFormatException e){
+			System.out.println("--> Digite um numero");
 		}
 		printaMenu();
 	}
@@ -138,7 +151,7 @@ public class AplicacaoConsole {
 		String salaApelido = scanner.nextLine();
 		System.out.print  ("Capacidade da sala: ");
 		int salaCapacidade = scanner.nextInt();
-		System.out.println  ("Tipos de sala: 1.AULA | 2.LABORATÓRIO | 3.CONFERÊNCIA | 4.VIDEOCONFÊRENCIA");
+		System.out.println  ("Tipos de sala: 1.AULA | 2.LABORATORIO | 3.CONFERENCIA | 4.VIDEOCONFERENCIA");
 		int tipoSala = tipoDeSala();
 		
 		ControladorSala.adicionarSala(salaId, salaApelido, salaCapacidade, tipoSala);
@@ -184,11 +197,12 @@ public class AplicacaoConsole {
 			dataFim = new Date();
 		System.out.print  ("Nome do contato para o evento: ");
 		String contato = scanner.nextLine();
-		System.out.print  ("Repetições semanias do evento: ");
+		System.out.print  ("Repeticoes semanias do evento: ");
 		int repeticoes = scanner.nextInt();
 		scanner.nextLine();
 		
 		ControladorEvento.adicionarEvento(nomeEvento, dataInicio, dataFim, contato, repeticoes);
+		System.out.print  ("Evento adicionado com sucesso!");
 	}
 	
 	/**
@@ -205,7 +219,7 @@ public class AplicacaoConsole {
 		
 		//Checagem de itens na lista---------------------------------------------------------------------
 		if(eventosAux.size()==0){
-			System.out.println("Não há eventos para serem alocados!");
+			System.out.println("Nao ha eventos para serem alocados!");
 			return;
 		}
 		else if(salas.size()==0){
@@ -215,44 +229,45 @@ public class AplicacaoConsole {
 		System.out.println("------------------------------ Alocar Evento ----------------------------------");
 		
 		//Listando Eventos----------------------------------------------------------------------------------
-		System.out.println("Lista de Eventos sem sala...");
+		System.out.println("Lista de Eventos sem sala...\n");
 		int count = 1;
 		for(Evento evento: eventosAux){
-			if(evento.getSala() == null)
-				continue;
+			
 			eventos.add(evento);
 			System.out.println("Id: "+count+" | Nome: "+evento.getNome()+" | Data Inicio: "+evento.getDataInicio()+" | Repeticoes: "+evento.getRepeticao());
 			count++;
 		}
-		if(eventos.size()==0){
-			System.out.println("Não há eventos para serem alocados!");
+		
+		if(eventosAux.size()==0){
+			System.out.println("Nao ha eventos para serem alocados!");
 			return;
 		}
-		System.out.println("Escolha o Evento para alocar uma sala: ");
+		
+		System.out.print("\nEscolha o Evento para alocar uma sala: ");
 		int idEvento = scanner.nextInt()-1;
 		scanner.nextLine();
 		eventoAloc = eventos.get(idEvento);
-		System.out.println("Evento "+eventoAloc.getNome()+" escolhido para alocar uma Sala.");
+		System.out.println("Evento escolhido: "+eventoAloc.getNome()+" foi escolhido para alocar uma Sala.\n");
 		
 		/* ESSA LISTAGEM DE SALAS PODERIA SER A LISTAGEM DE SALAS DISPONIVEIS!!! OU ENTAO REMOVE ESSA LISTAGEM DE SALAS
-		 * SE FOR REMOVER A LISTAGEM DAS SALAS, TENTA RETORNAR UMA MENSAGEM DE SUCESSO DO CONTROLLER PRA CÁ!
+		 * SE FOR REMOVER A LISTAGEM DAS SALAS, TENTA RETORNAR UMA MENSAGEM DE SUCESSO DO CONTROLLER PRA CÃ�!
 		 */
 		
 		//Listando Salas----------------------------------------------------------------------------------
-		System.out.println("Lista de Salas para alocar...");
+		System.out.println("Lista de Salas para alocar...\n");
 		count = 1;
 		for(Sala sala: salas){
-			System.out.println("Id: "+count+" | Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade()+" | Tipo: "+sala.getTipo());
-			System.out.println("Id: "+count+" | Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade()+" | Tipo: "+sala.getTipo().getClass().getName());
+			System.out.println(" "+count+" | Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade()+" | Tipo: "+sala.getTipo());
+			//System.out.println("Id: "+count+" | Nome: "+sala.getId()+" | Apelido: "+sala.getApelido()+" | Capacidade: "+sala.getCapacidade()+" | Tipo: "+sala.getTipo().getClass().getName());
 			count++;
 		}
-		System.out.println("Escolha a Sala para alocar um Evento: ");
+		System.out.print("\nEscolha a Sala para alocar um Evento: ");
 		int idSala = scanner.nextInt()-1;
 		scanner.nextLine();
 		
 		//Alocando Evento em Sala------------------------------------------------------------------------
-		ControladorEvento.alocarEvento(eventoAloc);
-		System.out.println("Evento "+eventoAloc.getNome()+" alocado na sala "+salas.get(idSala).getApelido());
+		ControladorEvento.alocarEvento(salas.get(idSala), eventoAloc);
+		System.out.println("Evento: "+eventoAloc.getNome()+" foi alocado na sala "+salas.get(idSala).getApelido() +".");
 	}
 	
 	/**
@@ -266,43 +281,54 @@ public class AplicacaoConsole {
 		System.out.println("---------------------------- Localizar Evento ---------------------------------");
 		printaSubMenuLocalizar();
 
-		System.out.print("Digite uma Opção de busca: ");
-		int opLocalizar = scanner.nextInt();
-		scanner.nextLine();
-		Evento evento = null;
-		switch (opLocalizar) {
-        case 1:
-            System.out.println("Digite o nome");
-            String nome = scanner.nextLine();
-            evento = ControladorEvento.localizarPorNome(nome);           
-            break;
-        case 2:
-            System.out.println("Digite o contato");
-            String contato = scanner.nextLine();
-            evento = ControladorEvento.localizarPorContato(contato);          
-            break;
-        case 3:
-            System.out.println("Digite a data inicial");
-            String dataIni = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoDataInicial(dataIni);           
-            break;
-        case 4:
-            System.out.println("Digite a data final");
-            String dataFim = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoDataFim(dataFim);            
-            break;
-        case 0:   
-        	printaMenu();
-            break;
-        default:
-             System.out.println("Este não é uma opção válida!");
-     }
-		if(evento==null){
-			System.out.println("Evento nao encontrado!");
-			return;
+		System.out.print("Digite uma opcao de busca: ");
+		//int opLocalizar = scanner.nextInt();
+		
+		String escolha = scanner.nextLine();
+		
+		try{
+			int numeroEscolhido = Integer.parseInt(escolha);
+			
+
+			Evento evento = null;
+			switch (numeroEscolhido) {
+		        case 1:
+		            System.out.println("Digite o nome: ");
+		            String nome = scanner.nextLine();
+		            evento = ControladorEvento.localizarPorNome(nome);           
+		            break;
+		        case 2:
+		            System.out.println("Digite o contato: ");
+		            String contato = scanner.nextLine();
+		            evento = ControladorEvento.localizarPorContato(contato);          
+		            break;
+		        case 3:
+		            System.out.println("Digite a data inicial: ");
+		            String dataIni = scanner.nextLine();
+		            evento = ControladorEvento.localizarEventoDataInicial(dataIni);           
+		            break;
+		        case 4:
+		            System.out.println("Digite a data final: ");
+		            String dataFim = scanner.nextLine();
+		            evento = ControladorEvento.localizarEventoDataFim(dataFim);            
+		            break;
+		        case 0:   
+		        	printaMenu();
+		            break;
+		        default:
+		             System.out.println("Este nao e uma opcao valida!");
+			}
+			if(evento==null){
+				System.out.println("Evento nao encontrado!");
+				return;
+			}
+			System.out.println("Evento Encontrado!");
+			System.out.println("Evento: "+evento.getNome()+" | Contato: "+evento.getContato()+" | Data Inicio: "+evento.getDataInicio()+" | Repeticoes: "+evento.getRepeticao());
+			
+		}catch(NumberFormatException e){
+			System.out.println("--> Digite um numero");
 		}
-		System.out.println("Evento Encontrado!");
-		System.out.println("Evento: "+evento.getNome()+" | Contato: "+evento.getContato()+" | Data Inicio: "+evento.getDataInicio()+" | Repeticoes: "+evento.getRepeticao());
+
 	}
 	
 	/**

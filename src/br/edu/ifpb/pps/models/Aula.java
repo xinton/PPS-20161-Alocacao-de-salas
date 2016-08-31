@@ -1,16 +1,17 @@
 package br.edu.ifpb.pps.models;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import br.edu.ifpb.pps.models.interfaces.TipoSala;
 
 public class Aula implements TipoSala{
-	private Map<TipoMaterial,Integer> materiais;
+	private Map<TipoMaterial,Integer> materiais = new HashMap<>();
 	/**
 	 * @author João Paulo
 	 */
 	public Aula(){
-		materiais.put(TipoMaterial.CADEIRA, 20 );
+		materiais.put(TipoMaterial.CADEIRA, 20);
 		materiais.put(TipoMaterial.MESA, 1 );
 	}
 
@@ -36,16 +37,16 @@ public class Aula implements TipoSala{
 		}
 	}
 
-	@Override
 	public void funcao(int tipo, String apelido) {
 		System.out.print("Codigo da sala de aula: " + tipo + ".");
 		System.out.println("Descricao: "+ apelido + ".");
 	}
 
-	@Override
+	
 	public String getTipo() {
 		return "Aula";
 	}
+	
 	public void verFuncao() {
 		System.out.println("A funcao dessa sala e dar aula");
 		

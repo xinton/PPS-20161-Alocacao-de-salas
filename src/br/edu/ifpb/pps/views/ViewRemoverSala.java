@@ -71,7 +71,7 @@ public class ViewRemoverSala extends JFrame {
 				Sala s = salas.get(cbxSalas.getSelectedIndex());
 				txtApelido.setText(s.getApelido());
 				txtCapacidade.setText(""+s.getCapacidade());
-				txtTipo.setText(s.getTipo());
+				txtTipo.setText(s.getApelido());
 			}
 		});
 		cbxSalas.setBounds(94, 23, 179, 27);

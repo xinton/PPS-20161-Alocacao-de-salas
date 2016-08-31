@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import br.edu.ifpb.pps.facade.EventoFacade;
 import br.edu.ifpb.pps.models.Evento;
+import br.edu.ifpb.pps.models.Sala;
 
 public abstract class ControladorEvento {
 
@@ -28,6 +29,11 @@ public abstract class ControladorEvento {
 	ou nao). O sistema deve informar as salas disponiveis
 	que satisfacam as restricoes do evento.
 	 */
+	public static void alocarEvento(Sala sala, Evento evento)
+	{
+		eventoFacade.alocarEvento(sala, evento);
+	}
+	
 	public static void alocarEvento(Evento evento)
 	{
 		eventoFacade.alocarEvento(evento);

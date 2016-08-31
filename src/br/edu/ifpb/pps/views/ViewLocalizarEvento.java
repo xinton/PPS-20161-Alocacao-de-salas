@@ -149,7 +149,8 @@ public class ViewLocalizarEvento extends JFrame {
 				}
 				
 				if(ev==null){
-					ev = ControladorEvento.localizaEventoParteDoNome(txtBusca.getText());
+					//ev = ControladorEvento.localizaEventoParteDoNome(txtBusca.getText());
+					ev = ControladorEvento.localizarPorNome(txtBusca.getText());
 					System.out.println("2");
 				}
 				if(ev == null){

@@ -151,7 +151,7 @@ public class ViewDesalocarEvento extends JFrame {
 		eventos.clear();
 		List<Evento> eventosAux = ControladorEvento.getEventos();
 		for(Evento e:eventosAux){
-			if(e.getNumeroDeSalas()!=0){
+			if(e.getSala() != null){
 				eventos.add(e);
 			 	cbxEvento.addItem(e.getNome());
 			}

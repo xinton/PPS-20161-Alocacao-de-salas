@@ -46,6 +46,14 @@ public class EventoFacade
 	 * @author Matheus Mayer <matheusmayerduarte@gmail.com>
 	 * Este metodo alocar√° um evento na primeira sala vazia encontrada automaticamente
 	 */
+	//Alocar evento tendo j· uma sala como escolha
+	public void alocarEvento(Sala sala, Evento evento)
+	{
+		evento.setSala(sala);
+		sala.setEvento(evento);
+	}
+	
+	//Alocar evento procurando uma sala disponivel
 	public void alocarEvento(Evento evento)
 	{
 		Sala sala = salaFacade.procurarSalaDisponivel();
@@ -63,6 +71,16 @@ public class EventoFacade
 			return localizarEventoPorNome(nomeEvento);
 		} else if (!contato.isEmpty()) {
 			return localizarEventoPeloContato(contato);
+		} else{ 
+
+			throw new Exception("Nao foi possivel localizar o evento pretendido");
+		}
+	}
+	
+	public Evento localizarEvento(String nomeEvento) throws Exception 
+	{	
+		if (!nomeEvento.isEmpty()) {
+			return localizarEventoPorNome(nomeEvento);
 		} else{ 
 
 			throw new Exception("Nao foi possivel localizar o evento pretendido");

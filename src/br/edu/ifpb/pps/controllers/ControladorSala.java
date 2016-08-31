@@ -19,8 +19,8 @@ public abstract class ControladorSala {
 		salaFacade.adicionarSala(id, apelido, capacidade, IDsala);
 	}
 
-	public static void removerSala(String idSala){
-		salaFacade.removerSala(idSala);
+	public static void removerSala(String nomeSala){
+		salaFacade.removerSala(nomeSala);
 	}
 	
 	public static ArrayList<Sala> getSalas()

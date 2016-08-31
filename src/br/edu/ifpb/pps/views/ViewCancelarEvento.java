@@ -122,7 +122,7 @@ public class ViewCancelarEvento extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Evento ev = eventos.get(cbxEvento.getSelectedIndex());
 				try {
-					ControladorEvento.cancelarEvento(ev);
+					ControladorEvento.cancelarEvento(ev.getNome());
 					JOptionPane.showMessageDialog(null, "Evento cancelado com sucesso!");
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Evento nao encontrado!");

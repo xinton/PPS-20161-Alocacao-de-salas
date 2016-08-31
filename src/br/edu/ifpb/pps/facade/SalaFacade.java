@@ -23,8 +23,9 @@ public class SalaFacade
 	public SalaFacade(){}
 	// ALGUÃ‰M PEGA ESSE METODO!!
 	public void adicionarSala(String id, String apelido, int capacidade, int IDsala){
-		IBridge sala;	
-		TipoSala tipoSala;	
+		//O que é que esse IBridge ta fazendo aqui?
+		//IBridge sala;	
+		TipoSala sala;	
 		
 		if (IDsala == 1) {
 			sala = new Aula();
@@ -39,8 +40,8 @@ public class SalaFacade
 		IDsala += 1;
 	}
 	
-	public void removerSala(String idSala){
-		Sala sala = getSalaId(idSala);
+	public void removerSala(String nomeSala){
+		Sala sala = getSalaId(nomeSala);
 		salas.remove(sala);
 	}
 	
@@ -68,10 +69,12 @@ public class SalaFacade
 	/*
 	 * @author Diego Carvalho
 	 */
-	public Sala getSalaId(String id){
-		for(Sala sala: salas)
-			if(sala.getApelido().equals(id))
+	public Sala getSalaId(String nomeSala){
+		for(Sala sala: salas){
+			if(sala.getId().equals(nomeSala)){
 				return sala;
+			}
+		}
 		return null;
 	}
 }
