@@ -16,8 +16,6 @@ import br.edu.ifpb.pps.models.interfaces.IBuilderEvento;
 
 public abstract class ControladorEvento {
 
-	private static ArrayList<Evento> eventos= new ArrayList<Evento>();
-	private static Diretor diretor = Diretor.getInstance();
 	private static EventoFacade eventoFacade = new EventoFacade();
 	/**
 	 * @author Matheus Mayer
@@ -37,61 +35,19 @@ public abstract class ControladorEvento {
 	que satisfacam as restricoes do evento.
 	 */
 	public static void alocarEvento(Sala sala, Evento evento){
-		evento.alocarSala(sala);
-		sala.registrarEvento(evento);
-				
-		for(Sala opcao : salas){
-			if(opcao.getSala() == sala.getSala() && opcao.getEventos().isEmpty()){
-				salasDisponiveis.add(opcao);
-			}
-		}
-	}
-	
-	public static List<Sala> verificarSalasDisponiveis()
-	{
-		// ISSO AQUI É GAMBIS, VER UM JEITO MELHOR!! 
-		// FACHADA SERIA A MELHOR OPCAO!!
-		ArrayList<Sala> salas = ControladorSala.getSalas();
-		ArrayList<Sala> salasDisponiveis = new ArrayList<Sala>();
-
-		for (Sala sala: salas) {
-			if (sala.getEventos().isEmpty()){
-				salasDisponiveis.add(sala);
-			}
-		}
+		eventoFacade.alocarEvento(sala, evento);
 	}
 	
 	/**
 	 * @author Diego Carvalho
 	 */
 	public static void desalocarEvento(Evento evento) throws Exception{
-		if (evento != null) {
-			evento.desalocarSalas();
-		} else {
-			throw new Exception("Evento nao encontrado!");
-			}
-	}
-
-	/**
-	 * O usuario pode cancelar um evento. Neste caso, o
-	cancelamento remove o evento da base de dados e
-	desvincula as possiveis alocacoes previamente
-	computadas.
-	 * @throws Exception 
-	 */
-	public static void cancelarEvento(String nomeEvento) throws Exception{
-		Evento evento = localizarEventoPorNome(nomeEvento);
-		
-		if (evento == null) {
-			throw new Exception ("Evento não existente");
-		}
-		desalocarEvento(evento);
-		removerEvento(evento);
+		eventoFacade.desalocarEvento(evento);
 	}
 	
-	public static ArrayList<Evento> getEventos(){
-		return eventos;
-		}	
+	public static void cancelarEvento(String nomeEvento) throws Exception{
+		eventoFacade.cancelarEvento(nomeEvento);
+	}
 	
 	/**
 	 * Este metodo localizar um evento pela data inicial
@@ -117,15 +73,5 @@ public abstract class ControladorEvento {
 			if (evento.getDataFim().equals(date))
 				return evento;
 		return null;
-	}
-	
-	/**
-	 * Este metodo fara com que o evento seja removido da base de dados
-	 * @author Matheus Mayer
-	 * @param Evento evento
-	 * @since 26/07/2016
-	 */
-	private static void removerEvento(Evento evento){
-		eventos.remove(evento);
 	}
 }
