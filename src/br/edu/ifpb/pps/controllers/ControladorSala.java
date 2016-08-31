@@ -22,4 +22,9 @@ public abstract class ControladorSala {
 	public static void removerSala(String idSala){
 		salaFacade.removerSala(idSala);
 	}
+	
+	public static ArrayList<Sala> getSalas()
+	{
+		return salaFacade.getSalas();
+	}
 }

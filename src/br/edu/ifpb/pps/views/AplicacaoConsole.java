@@ -199,7 +199,7 @@ public class AplicacaoConsole {
 	 */
 	private void alocarEvento(){
 		ArrayList<Evento> eventos = new ArrayList<Evento>();
-		ArrayList<Evento> eventosAux = ControladorEvento.getEventos();
+		ArrayList<Evento> eventosAux = (ArrayList<Evento>) ControladorEvento.getEventos();
 		ArrayList<Sala> salas = ControladorSala.getSalas();
 		Evento eventoAloc = null;
 		
@@ -218,7 +218,7 @@ public class AplicacaoConsole {
 		System.out.println("Lista de Eventos sem sala...");
 		int count = 1;
 		for(Evento evento: eventosAux){
-			if(evento.getNumeroDeSalas()!=0)
+			if(evento.getSala() == null)
 				continue;
 			eventos.add(evento);
 			System.out.println("Id: "+count+" | Nome: "+evento.getNome()+" | Data Inicio: "+evento.getDataInicio()+" | Repeticoes: "+evento.getRepeticao());
@@ -234,6 +234,10 @@ public class AplicacaoConsole {
 		eventoAloc = eventos.get(idEvento);
 		System.out.println("Evento "+eventoAloc.getNome()+" escolhido para alocar uma Sala.");
 		
+		/* ESSA LISTAGEM DE SALAS PODERIA SER A LISTAGEM DE SALAS DISPONIVEIS!!! OU ENTAO REMOVE ESSA LISTAGEM DE SALAS
+		 * SE FOR REMOVER A LISTAGEM DAS SALAS, TENTA RETORNAR UMA MENSAGEM DE SUCESSO DO CONTROLLER PRA CÁ!
+		 */
+		
 		//Listando Salas----------------------------------------------------------------------------------
 		System.out.println("Lista de Salas para alocar...");
 		count = 1;
@@ -247,7 +251,7 @@ public class AplicacaoConsole {
 		scanner.nextLine();
 		
 		//Alocando Evento em Sala------------------------------------------------------------------------
-		ControladorEvento.alocarEvento(salas.get(idSala), eventoAloc);
+		ControladorEvento.alocarEvento(eventoAloc);
 		System.out.println("Evento "+eventoAloc.getNome()+" alocado na sala "+salas.get(idSala).getApelido());
 	}
 	
@@ -270,12 +274,12 @@ public class AplicacaoConsole {
         case 1:
             System.out.println("Digite o nome");
             String nome = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoPorNome(nome);           
+            evento = ControladorEvento.localizarPorNome(nome);           
             break;
         case 2:
             System.out.println("Digite o contato");
             String contato = scanner.nextLine();
-            evento = ControladorEvento.localizarEventoPeloContato(contato);          
+            evento = ControladorEvento.localizarPorContato(contato);          
             break;
         case 3:
             System.out.println("Digite a data inicial");
@@ -308,7 +312,7 @@ public class AplicacaoConsole {
 	 *  @since 26/07/2016
 	 */
 	private void desalocarEvento(){
-		ArrayList<Evento> eventos = ControladorEvento.getEventos();
+		ArrayList<Evento> eventos = (ArrayList<Evento>) ControladorEvento.getEventos();
 		System.out.println("---------------------------- Desalocar Evento ---------------------------------");
 		System.out.println("Digite o nome do evento para desalocar");
 		String eventoNome = scanner.nextLine();
@@ -360,7 +364,3 @@ public class AplicacaoConsole {
 		System.out.println("Sala "+sala+" removida com sucesso!");
 	}
 }
-
-
-
-

@@ -1,5 +1,8 @@
 package br.edu.ifpb.pps.facade;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -147,5 +150,46 @@ public class EventoFacade
 	
 	public void setDiretor(Diretor diretor) {
 		this.diretor = diretor;
+	}
+	
+
+	/**
+	 * Este metodo localizar um evento pela data inicial
+	 * @author Washington
+	 * @param String data
+	 * @return Evento evento || null
+	 */
+	public Evento localizarEventoDataInicial(String data) throws ParseException {			
+		// usuario tem que digitar assim -> dd/mm/aaaa
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(data);
+
+		for (Evento evento: eventos){
+			if (evento.getDataInicio().equals(date)){
+
+				return evento;
+			}
+		}
+
+		return null;
+	}
+	/**
+	 * Este metodo localizar um evento pela data fim
+	 * @author Washington
+	 * @param String data
+	 * @return Evento evento || null
+	 */
+	public Evento localizarEventoDataFim(String data) throws ParseException {			
+		// usuario tem que digitar assim -> dd/mm/aaaa
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = format.parse(data);
+		for (Evento evento: eventos){
+			if (evento.getDataFim().equals(date)){
+
+				return evento;
+			}
+		}
+
+		return null;
 	}
 }

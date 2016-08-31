@@ -1,6 +1,7 @@
 package br.edu.ifpb.pps.facade;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifpb.pps.models.Aula;
 import br.edu.ifpb.pps.models.Conferencia;
@@ -17,7 +18,7 @@ import br.edu.ifpb.pps.models.interfaces.TipoSala;
  */
 public class SalaFacade
 {
-	private static ArrayList<Sala> salas = new ArrayList<Sala>();
+	private ArrayList<Sala> salas = new ArrayList<Sala>();
 	
 	public SalaFacade(){}
 	// ALGUÉM PEGA ESSE METODO!!
@@ -43,6 +44,15 @@ public class SalaFacade
 		salas.remove(sala);
 	}
 	
+	public ArrayList<Sala> getSalas()
+	{
+		return this.salas;
+	}
+	
+	public void setSalas(ArrayList<Sala> salas)
+	{
+		this.salas = salas;
+	}
 	/*
 	 * Este metodo servirá para resgatar a primeira sala disponivel
 	 * @author Matheus Mayer <matheusmayerduarte@gmail.com> 
