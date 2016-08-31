@@ -49,13 +49,15 @@ public class AplicacaoGrafica extends JFrame {
 	
 	@SuppressWarnings("unused")
 	private void inicializacaoDeDebug(){
-		ControladorSala.adicionarSala("sl01","apelido01", 1, 1);
-		ControladorSala.adicionarSala("sl02", "apelido02", 2, 2);
-		ControladorSala.adicionarSala("sl03", "apelido03", 3, 3);
-		ControladorSala.adicionarSala("sl04", "apelido04", 4, 4);
+		ControladorSala.adicionarSala("Sala 01","sl01", 1, 1);
+		ControladorSala.adicionarSala("Laboratorio 01", "lb01", 2, 2);
+		ControladorSala.adicionarSala("Laboratorio 02", "lb02", 3, 2);
 		
-		ControladorEvento.adicionarEvento("Evento 01", new Date(), new Date(), "Contato_01", 1);
-		ControladorEvento.adicionarEvento("Evento 02", new Date(), new Date(), "Contato_02", 2);
+		ControladorEvento.adicionarEvento("Evento 01 - A arte do Deboismo", new Date(), new Date(), "Matheus Mayer", 1);
+		ControladorEvento.adicionarEvento("Evento 02 - Passo a passo da POG", new Date(), new Date(), "Pedro Paiva", 2);
+		ControladorEvento.adicionarEvento("Evento 03 - Do zero ao mito no Firebase", new Date(), new Date(), "Joao Paulo", 3);
+		ControladorEvento.adicionarEvento("Evento 04 - Como dizer nao vai da nao para o seu chefe", new Date(), new Date(), "Diego Carvalho", 4);
+		ControladorEvento.adicionarEvento("Evento 05 - Como sobreviver ao 5º periodo", new Date(), new Date(), "Washington Bruno", 5);
 	}
 
 	/**

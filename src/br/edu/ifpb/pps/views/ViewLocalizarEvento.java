@@ -143,21 +143,26 @@ public class ViewLocalizarEvento extends JFrame {
 				
 				if(ev==null){
 					try {
-						System.out.println("1");
+						//System.out.println("1");
 						ev = ControladorEvento.localizarEventoDataInicial(txtBusca.getText());
 					} catch (ParseException e1) {}
 				}
 				
 				if(ev==null){
-					//ev = ControladorEvento.localizaEventoParteDoNome(txtBusca.getText());
-					ev = ControladorEvento.localizarPorNome(txtBusca.getText());
-					System.out.println("2");
-				}
+					try{
+						//ev = ControladorEvento.localizaEventoParteDoNome(txtBusca.getText());
+						ev = ControladorEvento.localizarPorNome(txtBusca.getText());
+					}catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Evento nao encontrado!");
+					}
+					
+					//System.out.println("2");
+				}/*
 				if(ev == null){
 					JOptionPane.showMessageDialog(null, "Evento nao localizado!");
 					closeWindow();
 					return;
-				}
+				}*/
 				format = new SimpleDateFormat("dd/MM/yyyy");
 				txtNome.setText(ev.getNome());
 				txtContato.setText(ev.getContato());
