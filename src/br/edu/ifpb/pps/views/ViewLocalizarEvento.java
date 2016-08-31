@@ -105,6 +105,9 @@ public class ViewLocalizarEvento extends JFrame {
 		JLabel lblDataFim = new JLabel("Data Fim:");
 		lblDataFim.setBounds(16, 129, 85, 16);
 		panel_1.add(lblDataFim);
+			
+		//Faltou um label para informar em qual sala o evento esta
+		//Ou para informar que ele nao tem sala
 		
 		txtFim = new JTextField();
 		txtFim.setEnabled(false);
