@@ -1,6 +1,6 @@
 package br.edu.ifpb.pps.models;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 
 public class Evento {
@@ -9,7 +9,7 @@ public class Evento {
 	private Date dataInicio, dataFim;
 	private int repeticao;
 	private boolean repete;
-	private ArrayList<Sala> salas = new ArrayList<Sala>();
+	private Sala sala;
 	
 	public Evento(){}
 	
@@ -28,24 +28,7 @@ public class Evento {
 		this.repeticao = repeticao;
 		checaRepeticao();
 	}
-	
-	/**
-	 * Metodo de alocacao de uma sala a um Evento
-	 * 
-	 * @param sala
-	 * @author Diego Carvalho
-	 * @since 25/07/2016
-	 */
-	public void alocarSala(Sala sala){
-		if(salas == null)
-			salas = new ArrayList<Sala>();
-		salas.add(sala);
-	}
-	
-	public void desalocarSalas(){
-		salas.clear();
-	}
-	
+		
 	/**
 	 * Metodo que checa se o evento tem alguma repeticao e altera a variavel repete (do tipo Boolean) para o estado atual.
 	 * 
@@ -59,6 +42,14 @@ public class Evento {
 			repete = false;
 	}
 	
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
+	}
+
 	public String getNome()     { return nome; }
 	
 	public String getContato()  { return contato; }
@@ -70,8 +61,6 @@ public class Evento {
 	public int getRepeticao()   { return repeticao; }
 	
 	public boolean isRepete()   { return repete; }
-	
-	public int getNumeroDeSalas(){ return salas.size(); }
 	
 	public void setNome(String nome)           { this.nome = nome; }
 
