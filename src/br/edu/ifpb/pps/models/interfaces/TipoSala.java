@@ -9,4 +9,6 @@ public interface TipoSala {
 	public void adcionarMateriais(TipoMaterial material, int quantidade);
 	public void removerMaterial(TipoMaterial material, int quantidade);
 	public void verFuncao();
+	public void funcao(int tipo, String apelido);
+	public String getTipo();
 }

@@ -1,5 +1,6 @@
 package br.edu.ifpb.pps.models;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import br.edu.ifpb.pps.models.interfaces.TipoSala;
@@ -10,7 +11,7 @@ import br.edu.ifpb.pps.models.interfaces.TipoSala;
 
 public class Conferencia implements TipoSala{
 
-	private Map<TipoMaterial,Integer> materiais;
+	private Map<TipoMaterial,Integer> materiais = new HashMap<>();
 	
 	public Conferencia(){
 		materiais.put(TipoMaterial.CADEIRA, 10 );

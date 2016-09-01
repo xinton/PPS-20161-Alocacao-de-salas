@@ -5,9 +5,8 @@ package br.edu.ifpb.pps.models.interfaces;
 public abstract class Pavimento {
 	String id;
 
-	
 	public Pavimento(String id){
-		this.id=id;
+		this.id = id;
 	}
 	
 	public String getId() {

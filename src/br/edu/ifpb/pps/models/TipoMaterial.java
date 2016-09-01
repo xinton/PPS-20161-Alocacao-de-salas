@@ -13,4 +13,8 @@ public enum TipoMaterial {
 	TipoMaterial(String material){
 		this.material=material;
 	}
+	
+	public String toString(){
+		return this.material;
+	}
 }
